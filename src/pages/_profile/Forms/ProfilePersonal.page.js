@@ -217,7 +217,7 @@ class ProfilePersonalPage extends React.Component {
             <h5 className="m-30">Name </h5>           
              <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form noValidate autoComplete="off" className="fullw">
+                <form  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="first_name" label="First name" variant="outlined" required />
                 </form>
@@ -236,7 +236,7 @@ class ProfilePersonalPage extends React.Component {
             </Grid>
             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form noValidate autoComplete="off" className="fullw">
+                <form  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="middle_name" label="Middle name" variant="outlined" required />
                 </form>

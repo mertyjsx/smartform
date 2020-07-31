@@ -84,7 +84,8 @@ width: 100%;
   }
 }
 
- 
+ h6{padding: 0 !important;
+margin: 0 !important;}
 .m-30{
   margin: 10px;
   margin-top: 50px;
@@ -96,6 +97,19 @@ width: 100%;
 .m-20{
   margin: 20px;
   margin-bottom: 50px;
+}
+.mb20{
+  margin: 20px !important;
+  margin-top: 30px !important;
+  margin-bottom: 50px !important;
+}
+.universty {
+  
+  align-items: center;
+  border: 2px solid #4285F4;
+  margin: 20px;
+  width: 90% !important;
+  height: 56px;
 }
 .center{
   justify-content: center;
@@ -111,7 +125,16 @@ width: 100%;
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.add-tag{
+  color:#4285F4;
+  font-size: 19px;
+margin: 20px;
+text-decoration: underline;
+}
+.add-tag:hover{
+  cursor: pointer;
+  
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
