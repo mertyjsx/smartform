@@ -1,5 +1,29 @@
 import React from "react";
 import { personalProfileData } from "../../_services/profile.service";
+import { Grid } from "@material-ui/core"
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Multi from "../../_components/MultipleSelect"
+import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
+import MultipleSelect from 'react-select';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+const options = [
+  { value: 'public', label: 'Public' },
+  { value: 'private', label: 'Private' },
+  { value: 'resume', label: 'Resume' },
+];
+const phoneTypes = [
+  { value: 'mobile', label: 'Mobile' },
+  { value: 'work', label: 'Work' },
+  { value: 'home', label: 'Home' }
+]
 
 class ProfilePersonalPage extends React.Component {
   constructor(props) {
@@ -17,6 +41,7 @@ class ProfilePersonalPage extends React.Component {
       state: "",
       country: "",
       phone_number: "",
+      phone_type: "mobile",
       public: [],
       private: [],
       resume: [],
@@ -34,24 +59,122 @@ class ProfilePersonalPage extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleChangePublic(e) {
-    const { name } = e.target;
-    let publicVar = [];
 
-    let existed_item = this.state.public.find(
-      (item) => item === name
-    );
 
-    if(existed_item){
-      let new_items = this.state.public.filter(
+
+
+
+
+
+  handleChangePublic(name, which) {
+
+  }
+
+
+  handleCheckbox = (name, e) => {
+    let array = e ? e : []
+    console.log(array)
+    let isPublic = array.find(item => item.value === "public")
+    let isPrivate = array.find(item => item.value === "private")
+    let isResume = array.find(item => item.value === "resume")
+    console.log(isPublic)
+
+    if (isPublic) {
+
+      let publicVar = this.state.public;
+      // code block
+      let existed_item = this.state.public.find(
+        (item) => item === name
+      );
+
+
+      if (!existed_item) {
+        publicVar.push(name)
+        this.setState({ public: publicVar });
+      }
+
+
+
+
+
+    } else {
+
+      let filtered_array = this.state.public.filter(
         (item) => item !== name
       );
-      this.state.public.push(new_items);
-    }else{
-      this.state.public.push(name);
+
+      this.setState({ public: filtered_array })
+
     }
-    
-    console.log("Public -- ",this.state.public);
+
+    if (isPrivate) {
+
+      let privateVar = this.state.private;
+      // code block
+      let existed_item2 = this.state.private.find(
+        (item) => item === name
+      );
+
+
+      if (!existed_item2) {
+        privateVar.push(name)
+        this.setState({ private: privateVar });
+      }
+
+
+    } else {
+
+      let filtered_array2 = this.state.private.filter(
+        (item) => item !== name
+      );
+
+      this.setState({ private: filtered_array2 })
+
+    }
+
+    if (isResume) {
+      let resumeVar = this.state.resume;
+      // code block
+      let existed_item3 = this.state.resume.find(
+        (item) => item === name
+      );
+
+
+      if (!existed_item3) {
+        resumeVar.push(name)
+        this.setState({ resume: resumeVar });
+      }
+
+
+    } else {
+
+      let filtered_array3 = this.state.resume.filter(
+        (item) => item !== name
+      );
+
+      this.setState({ resume: filtered_array3 })
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    array.map((which) => {
+
+
+
+
+
+    })
+
+
     // this.setState({ [name]: value });
   }
 
@@ -85,552 +208,246 @@ class ProfilePersonalPage extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const { loading, error } = this.state;
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
-          <div className="form-input-flex d-flex the-input-1">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>First name</label>
-                <input
-                  type="text"
-                  name="first_name"
-                  className="form-control"
-                  onChange={this.handleChange}
-                  required
-                  autoFocus
-                />
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <span>Public Profile</span>
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="firstNameCheckedPublic"
-                      name="first_name"
-                      className="custom-control-input"
-                      onChange={this.handleChangePublic}
+          <Grid container direction="column" className="m-20">
+            <h5 className="m-30">Name </h5>           
+             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                <form noValidate autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="first_name" label="First name" variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("first_name", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+                <form noValidate autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="middle_name" label="Middle name" variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("middle_name", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" className="p-12" >
+                <form noValidate autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="last_name" label="last_name" variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12" className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("last_name", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                <form noValidate autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="preferred_name" label="preferred_name" variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("preferred_name", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+            <h5 className="m-30">Phone Number</h5> 
+            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30" >
+              <Grid container xs={12} md={7} alignItems="center" alignContent="center" direction="row" className="p-12">
+                <Grid item xs={7}>
+                  <form noValidate className="fullw">
+
+                    <TextField className="fullw" type="tel" onChange={this.handleChange} id="outlined-basic" name="phone_number" label="phone_number" variant="outlined" required />
+                  </form>
+                </Grid>
+                <Grid item xs={5}>
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    placeholder="mobile"
+                    onChange={(e) => this.setState({ phone_type: e })}
+                    options={phoneTypes}
+                  />
+
+                </Grid>
+              </Grid>
+
+              <Grid container xs={12} md={5}  className="p-12">
+
+                <FormControl variant="outlined" className="rightselect" >
+
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("phone_number", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+            <h5 className="m-30">Adress information</h5> 
+            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                <form noValidate autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="address" label="address" variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("address", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+              </Grid>
+              <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                  <form noValidate autoComplete="off" className="fullw">
+
+                    <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="zip_code" label="zip_code" variant="outlined" required />
+                  </form>
+                </Grid>
+                <Grid item xs={12} md={5} className="p-12">
+                  <FormControl variant="outlined" className="rightselect" >
+                    <MultipleSelect
+
+                      className="multiSelect"
+                      isMulti={true}
+                      onChange={(e) => this.handleCheckbox("zip_code", e)}
+                      options={options}
                     />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="firstNameCheckedPublic"
-                    ></label>
+                  </FormControl>
+                </Grid>
+                </Grid>
+                <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                  <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                    <form noValidate autoComplete="off" className="fullw">
+
+                      <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="city" label="city" variant="outlined" required />
+                    </form>
+                  </Grid>
+                  <Grid item xs={12} md={5} className="p-12">
+                    <FormControl variant="outlined" className="rightselect" >
+                      <MultipleSelect
+
+                        className="multiSelect"
+                        isMulti={true}
+                        onChange={(e) => this.handleCheckbox("city", e)}
+                        options={options}
+                      />
+                    </FormControl>
+                  </Grid>
+                  </Grid>
+                  <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                    <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                      <form noValidate autoComplete="off" className="fullw">
+
+                        <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="state" label="state" variant="outlined" required />
+                      </form>
+                    </Grid>
+                    <Grid item xs={12} md={5} className="p-12">
+                      <FormControl variant="outlined" className="rightselect" >
+                        <MultipleSelect
+
+                          className="multiSelect"
+                          isMulti={true}
+                          onChange={(e) => this.handleCheckbox("state", e)}
+                          options={options}
+                        />
+                      </FormControl>
+                    </Grid>
+                    </Grid>
+                    <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                      <Grid container xs={12} md={7} alignItems="center" alignContent="center"  className="p-12" >
+                        <form noValidate autoComplete="off" className="fullw">
+
+                          <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="country" label="country" variant="outlined" required />
+                        </form>
+                      </Grid>
+                      <Grid item xs={12} md={5}  className="p-12">
+                        <FormControl variant="outlined" className="rightselect" >
+                          <MultipleSelect
+
+                            className="multiSelect"
+                            isMulti={true}
+                            onChange={(e) => this.handleCheckbox("country", e)}
+                            options={options}
+                          />
+                        </FormControl>
+                      </Grid>
+
+                    </Grid>
+                    </Grid>
+                  <div className="form-input-flex d-flex center">
+                    <div className="left-input-se">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{ width: "25%" }}
+                          aria-valuenow="25"
+                          aria-valuemin="3"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <span>Private profile </span>
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="firstNameCheckedPrivate"
-                      name="first_name"
-                      className="custom-control-input"
-                      onChange={this.handleChangePrivate}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="firstNameCheckedPrivate"
-                    ></label>
+                  <div className="form-input-flex d-flex center">
+                    <div className="left-input-se d-flex mt-4">
+                      {/* <button className="btn btn-purpal">Back</button> */}
+                      <button className="btn btn-green ml-auto" disabled={loading}>
+                        {loading ? "Next....." : "Next"}
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <span>Resume</span>
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="firstNameCheckedResume"
-                      className="custom-control-input"
-                      name="first_name"
-                      onChange={this.handleChangeResume}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="firstNameCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <span>+ Odd resume</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>Middle name </label>
-                <input
-                  type="text"
-                  name="middle_name"
-                  className="form-control"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="middleNameCheckedPublic"
-                      name="middle_name"
-                      onChange={this.handleChangePublic}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="middleNameCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="middleNameCheckedPrivate"
-                      name="middle_name"
-                      onChange={this.handleChangePrivate}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="middleNameCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="middleNameCheckedResume"
-                      name="middle_name"
-                      onChange={this.handleChangeResume}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="middleNameCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>Last name </label>
-                <input
-                  type="text"
-                  name="last_name"
-                  className="form-control"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="lastNameCheckedPublic"
-                      name="last_name"
-                      onChange={this.handleChangePublic}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="lastNameCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="lastNameCheckedPrivate"
-                      name="last_name"
-                      onChange={this.handleChangePrivate}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="lastNameCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="lastNameCheckedResume"
-                      name="last_name"
-                      onChange={this.handleChangeResume}
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="lastNameCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>Email </label>
-                <input
-                  type="email"
-                  name="email"
-                  className="form-control"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="emailCheckedPublic"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="emailCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="emailCheckedPrivate"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="emailCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="emailCheckedResume"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="emailCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>Address </label>
-                <textarea
-                  className="form-control"
-                  name="address"
-                  onChange={this.handleChange}
-                  required
-                ></textarea>
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="addressCheckedPublic"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="addressCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="addressCheckedPrivate"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="addressCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="addressCheckedResume"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="addressCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="row col-pd-7">
-                <div className="col-md-4">
-                  <div className="form-group">
-                    <label>Zip code </label>
-                    <input
-                      type="text"
-                      name="zip_code"
-                      className="form-control"
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-group">
-                    <label>City </label>
-                    <input
-                      type="text"
-                      name="city"
-                      className="form-control"
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-group">
-                    <label>State </label>
-                    <input
-                      type="text"
-                      name="state"
-                      className="form-control"
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="zcsCheckedPublic"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="zcsCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="zcsCheckedPrivate"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="zcsCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="zcsCheckedResume"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="zcsCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>Country </label>
-                <input
-                  type="text"
-                  name="country"
-                  className="form-control"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="countryCheckedPublic"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="countryCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="countryCheckedPrivate"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="countryCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="countryCheckedResume"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="countryCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="form-group">
-                <label>Phone number </label>
-                <input
-                  type="text"
-                  name="phone_number"
-                  className="form-control"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="right-input-se">
-              <div className="check-inline d-flex">
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="phoneNumberCheckedPublic"
-                      name="phone_number"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="phoneNumberCheckedPublic"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="phoneNumberCheckedPrivate"
-                      name="phoneNumber_type[]"
-                      value="private"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="phoneNumberCheckedPrivate"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="phoneNumberCheckedResume"
-                      name="phoneNumber_type[]"
-                      value="resume"
-                    />
-                    <label
-                      className="custom-control-label"
-                      htmlFor="phoneNumberCheckedResume"
-                    ></label>
-                  </div>
-                </div>
-                <div className="check-inline-box text-center"></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se">
-              <div className="progress">
-                <div
-                  className="progress-bar"
-                  role="progressbar"
-                  style={{ width: "25%" }}
-                  aria-valuenow="25"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="form-input-flex d-flex">
-            <div className="left-input-se d-flex mt-4">
-              {/* <button className="btn btn-purpal">Back</button> */}
-              <button className="btn btn-green ml-auto" disabled={loading}>
-                {loading ? "Next....." : "Next"}
-              </button>
-            </div>
-          </div>
+                      
+                    
         </form>
       </div>
     );

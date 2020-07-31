@@ -13,7 +13,7 @@ import Verify from "./pages/Verify.page";
 import HomePage from "./pages/Home.page";
 
 import ProfilePage from "./pages/Profile.page";
-
+import CreateUserPage from "./Admin/createUserpage"
 // PUBLIC & PRIVATE ROUTES HANDLING
 import AdminPrivateRoute from "./Route/AdminPrivateRoute";
 import AdminPublicRoute from "./Route/AdminPublicRoute";
@@ -40,7 +40,7 @@ function App() {
 
       <AdminPublicRoute exact path="/admin/login" component={AdminLogin} />
       <AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
-
+      <AdminPrivateRoute exact path="/admin/create-user" component={CreateUserPage} />
       <PrivateRoute exact path="/profile" component={ProfilePage} />
 
       <Route path="*" component={() => "404 Not Found!"} />

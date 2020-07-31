@@ -14,6 +14,7 @@ export const personalProfileData = async (fieldsState) => {
     state: fieldsState.state,
     country: fieldsState.country,
     phone_number: fieldsState.phone_number,
+    phone_type:fieldsState.phone_type
   };
   const formBody = handleFormRequest(dataArray);
 
@@ -39,6 +40,9 @@ export const personalProfileData = async (fieldsState) => {
       return error;
     });
 };
+
+
+
 
 // USING METHOD TO HANDLE REQUEST
 function handleFormRequest(dataArray) {

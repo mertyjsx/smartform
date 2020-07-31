@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "./_components/Navigation.page";
 import { Footer } from "./_components/Footer.page";
-
+import {Grid} from "@material-ui/core"
 // PROFILE SCREES IMPORT 
 import ProfilePersonalPage from "./_profile/Forms/ProfilePersonal.page";
 import ProfileEducationPage from "./_profile/Forms/ProfileEducation.page";
@@ -40,8 +40,8 @@ class ProfilePage extends React.Component {
         <div className="site_content">
           <div className="pro-box">
             <div className="container">
-              <div className="d-flex">
-                <div className="pro-left">
+              <Grid container spacing={3}>
+                <Grid item lg={3} md={12} xs={12}>
                   <div className="pro-left-in">
                     <ul>
                       <li className={(activeMenu === "Personal")?"active":""}>
@@ -61,8 +61,8 @@ class ProfilePage extends React.Component {
                       </li>
                     </ul>
                   </div>
-                </div>
-                <div className="pro-right">
+                </Grid>
+                <Grid item lg={9} md={12} xs={12}>
                 
                   {
                     (activeMenu === "Personal")?(
@@ -78,8 +78,8 @@ class ProfilePage extends React.Component {
                     )
                   }
                   
-                </div>
-              </div>
+                </Grid>
+              </Grid>
             </div>
           </div>
         </div>
