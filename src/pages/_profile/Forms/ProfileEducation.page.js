@@ -193,6 +193,7 @@ class ProfilePersonalPage extends React.Component {
 
     profileEducationData(this.state).then(
       (response) => {
+        console.log(response)
         if (response.success) {
           this.props.profileThis.setState({ activeMenu: "Experience" });
         } else {
@@ -218,10 +219,10 @@ class ProfilePersonalPage extends React.Component {
 
                   <Grid container direction={"row"} xs={12}  className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                      <form noValidate autoComplete="off" className="fullw">
+                      <FormControl  autoComplete="off" className="fullw">
 
                         <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_name" label="School name" variant="outlined" required />
-                      </form>
+                      </FormControl>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12">
                       <FormControl variant="outlined" className="rightselect" >
@@ -352,7 +353,7 @@ class ProfilePersonalPage extends React.Component {
             <div className="left-input-se d-flex mt-4">
               {/* <button className="btn btn-purpal">Back</button> */}
               {this.state.universty.length>0&&
-               <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+               <button  className="btn btn-green ml-auto" disabled={loading}>
                {loading ? "Next....." : "Next"}
              </button>
               

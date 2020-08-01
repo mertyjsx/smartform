@@ -277,7 +277,7 @@ justSkip=()=>{
                   this.state.employment.length>0&&(
 
                   
-                    <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+                    <button  className="btn btn-green ml-auto" disabled={loading}>
                     {loading ? "Next....." : "Next"}
                   </button>
                    

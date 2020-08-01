@@ -1,5 +1,5 @@
 import { getToken } from "./user.service";
-
+import axios from "axios"
 // USING METHOD TO SUBMIT USER PERSONAL DATA
 export const profileEducationData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
@@ -17,31 +17,33 @@ export const profileEducationData = async (fieldsState) => {
 
   };
 
- console.log(dataArray)
+ console.log(fieldsState.universty)
   const formBody = handleFormRequest(dataArray);
 
-  return fetch(apiUrl + "user/education", {
-    method: "POST",
-    headers: {
+  return  axios.post(apiUrl + "user/education", formBody, {
+    headers:  {
       "Authorization": "Bearer "+getToken(),
       "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: formBody,
+    }
   })
-    .then((response) => response.json())
-    .then((responseData) => {
-      console.log(responseData)
-      if (!responseData.success) {
-        alert(responseData.msg);
-      } else {
-        alert(responseData.msg);
-      }
-      return responseData;
-    })
-    .catch((error) => {
-      alert("Server not responsed, Please try again!");
-      return error;
-    });
+  
+ 
+ 
+  
+  
+  .then((responseData) => {
+    if (!responseData.success) {
+      alert(responseData.msg);
+    } else {
+      alert(responseData.msg);
+    }
+    return responseData;
+  })
+  .catch((error) => {
+    console.log(error)
+    alert("Server not responsed, Please try again!");
+    return error;
+  });
 };
 
 

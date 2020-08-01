@@ -252,91 +252,96 @@ class ProfilePersonalPage extends React.Component {
 }
 </div>
           
-        <div className={`${!this.state.enabled&&"unvisible"}`}>
+      {this.state.enabled&&
+      
+      <div >
           
       
           
-          <Grid container direction="column">
-            <h5 className="m-30">Skills </h5>           
-             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+      <Grid container direction="column">
+        <h5 className="m-30">Skills </h5>           
+         <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+          <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+            <form  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="skill" label="skill " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
+              <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="skill" label="skill " variant="outlined" required />
+            </form>
+          </Grid>
+          <Grid item xs={12} md={5} className="p-12">
+            <FormControl variant="outlined" className="rightselect" >
+              <MultipleSelect
 
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("skill", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+                className="multiSelect"
+                isMulti={true}
+                onChange={(e) => this.handleCheckbox("skill", e)}
+                options={options}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+          <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+            <form  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="skill_desc" label="Skill description " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
+              <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="skill_desc" label="Skill description " variant="outlined" required />
+            </form>
+          </Grid>
+          <Grid item xs={12} md={5} className="p-12">
+            <FormControl variant="outlined" className="rightselect" >
+              <MultipleSelect
 
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("skill_desc", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+                className="multiSelect"
+                isMulti={true}
+                onChange={(e) => this.handleCheckbox("skill_desc", e)}
+                options={options}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+          <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+            <form  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="level" label="level " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
+              <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="level" label="level " variant="outlined" required />
+            </form>
+          </Grid>
+          <Grid item xs={12} md={5} className="p-12">
+            <FormControl variant="outlined" className="rightselect" >
+              <MultipleSelect
 
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("level", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+                className="multiSelect"
+                isMulti={true}
+                onChange={(e) => this.handleCheckbox("level", e)}
+                options={options}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+          <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+            <form  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="experience_year" label="Experience year " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
+              <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="experience_year" label="Experience year " variant="outlined" required />
+            </form>
+          </Grid>
+          <Grid item xs={12} md={5} className="p-12">
+            <FormControl variant="outlined" className="rightselect" >
+              <MultipleSelect
 
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("experience_year", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-                    </Grid>
-                    </div>
-                    {this.state.enabled?<Button onClick={this.addSToArray} className="mb20 bgc ml-25 " variant="contained"   >add skill</Button>:<div onClick={()=>this.setState({enabled:false})} className="add-tag">new skills</div>}
+                className="multiSelect"
+                isMulti={true}
+                onChange={(e) => this.handleCheckbox("experience_year", e)}
+                options={options}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+                </Grid>
+                </div>
+      
+      
+      }
+                    {this.state.enabled?<Button onClick={this.addSToArray} className="mb20 bgc ml-25 " variant="contained"   >add skill</Button>:this.state.skills.length<10&&<div onClick={()=>this.setState({enabled:false})} className="add-tag">new skills</div>}
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se">
                       <div className="progress">
@@ -354,7 +359,7 @@ class ProfilePersonalPage extends React.Component {
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se d-flex mt-4">
                       {/* <button className="btn btn-purpal">Back</button> */}
-                      <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+                      <button  className="btn btn-green ml-auto" disabled={loading}>
                         {loading ? "Next....." : "Next"}
                       </button>
                     

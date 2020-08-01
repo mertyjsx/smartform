@@ -36,6 +36,9 @@ margin-bottom: 55px !important;
   border-top-left-radius: 0px;
   pointer-events: none;
 }
+.jss1 {
+  border-right: 0px;
+}
 
 .PrivateNotchedOutline-root-1 {
   border-right: 0 !important;

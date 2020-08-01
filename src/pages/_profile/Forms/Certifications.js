@@ -242,53 +242,57 @@ class ProfilePersonalPage extends React.Component {
 }
 </div>
           
-        <div className={`${!this.state.enabled&&"unvisible"}`}>
+      {this.state.enabled&&
+        <div >
           
           
           
-          <Grid container direction="column" className="m-20">
-            <h5 className="m-30">Certifications  </h5>           
-             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+        <Grid container direction="column" className="m-20">
+          <h5 className="m-30">Certifications  </h5>           
+           <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+            <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+              <form  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="certificate_name" label="Certificate name" variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
-
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("certificate_name", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
+                <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="certificate_name" label="Certificate name" variant="outlined" required />
+              </form>
             </Grid>
-            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+            <Grid item xs={12} md={5} className="p-12">
+              <FormControl variant="outlined" className="rightselect" >
+                <MultipleSelect
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="date_issue" label="Date issue " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
-
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("date_issue", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
+                  className="multiSelect"
+                  isMulti={true}
+                  onChange={(e) => this.handleCheckbox("certificate_name", e)}
+                  options={options}
+                />
+              </FormControl>
             </Grid>
-   
-                    </Grid>
-                    </div>
+          </Grid>
+          <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+            <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+              <form  autoComplete="off" className="fullw">
+
+                <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="date_issue" label="Date issue " variant="outlined" required />
+              </form>
+            </Grid>
+            <Grid item xs={12} md={5} className="p-12">
+              <FormControl variant="outlined" className="rightselect" >
+                <MultipleSelect
+
+                  className="multiSelect"
+                  isMulti={true}
+                  onChange={(e) => this.handleCheckbox("date_issue", e)}
+                  options={options}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+ 
+                  </Grid>
+                  </div>
+      
+      
+      }
                     {this.state.enabled?<Button onClick={this.addCToArray} className="mb20 bgc ml-25 " variant="contained"   >add certification</Button>:<div onClick={()=>this.setState({enabled:false})} className="add-tag">new certification</div>}
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se">
@@ -307,7 +311,7 @@ class ProfilePersonalPage extends React.Component {
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se d-flex mt-4">
                       {/* <button className="btn btn-purpal">Back</button> */}
-                      <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+                      <button className="btn btn-green ml-auto" disabled={loading}>
                         {loading ? "Next....." : "Next"}
                       </button>
                     

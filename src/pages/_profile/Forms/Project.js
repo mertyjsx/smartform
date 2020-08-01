@@ -271,107 +271,19 @@ skill_Array.push(this.state.skill)
 }
 </div>
           
-        <div className={`${!this.state.enabled&&"unvisible"}`}>
+      {this.state.enabled&&
+        <div>
           
           
           
-          <Grid container direction="column">
-            <h5 className="m-30">Skills </h5>           
-             <Grid container direction={"row"} xs={12}  className="mt-30">
-              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+        <Grid container direction="column">
+          <h5 className="m-30">Skills </h5>           
+           <Grid container direction={"row"} xs={12}  className="mt-30">
+            <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+              <form  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="project_name" label="Project name " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
-
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("project_name", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Grid container direction={"row"} xs={12}  className="mt-30">
-              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
-
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="project_desc" label="Project description " variant="outlined" required />
-                </form>
-              </Grid>
-              <Grid item xs={12} md={5} className="p-12">
-                <FormControl variant="outlined" className="rightselect" >
-                  <MultipleSelect
-
-                    className="multiSelect"
-                    isMulti={true}
-                    onChange={(e) => this.handleCheckbox("project_desc", e)}
-                    options={options}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Grid container direction={"row"} xs={12} className="mt-30">
-                  <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" justify="space-between">
-                    <Grid item xs={5}   >
-          
-                      <FormControl autoComplete="off" className="fullw">
-          
-                        <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_from" label="From" variant="outlined" required />
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs={5}  >
-                      <FormControl autoComplete="off" className="fullw">
-          
-                        <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_to" label="To" variant="outlined" required />
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12} md={5} className="p-12">
-                    <FormControl variant="outlined" className="rightselect" >
-                      <MultipleSelect
-          
-                        className="multiSelect"
-                        isMulti={true}
-                        onChange={(e) => {
-                          this.handleCheckbox("dt_from", e)
-                          this.handleCheckbox("dt_to", e)
-                        }}
-                        options={options}
-                      />
-                    </FormControl>
-                  </Grid>
-                </Grid>
-
-      <Paper elevation={3} className="paper-container margintop30">
-      <h5 className="m-30 color p-12">Skill gained</h5>
-        <Grid container>
-          <div>
-
-            {
-
-              this.state.skill_gained.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-                <Grid item>
-                  <h6> {item}</h6>
-                </Grid>
-
-               
-                <Grid item>
-                  <Button onClick={() => this.deleteSkill(item)} variant="contained" color="secondary"> delete </Button>
-                </Grid>
-              </Grid>)
-            }
-          </div>
-          <Grid container direction={"row"} xs={12} className={`mt-30 ${!this.state.enabled_skill&&"unvisible"}`}>
-            <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
-              <FormControl autoComplete="off" className="fullw">
-
-                <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="skill" label="skill" variant="outlined" required />
-              </FormControl>
+                <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="project_name" label="Project name " variant="outlined" required />
+              </form>
             </Grid>
             <Grid item xs={12} md={5} className="p-12">
               <FormControl variant="outlined" className="rightselect" >
@@ -379,27 +291,123 @@ skill_Array.push(this.state.skill)
 
                   className="multiSelect"
                   isMulti={true}
-                  onChange={(e) => this.handleCheckbox("skill_gained", e)}
+                  onChange={(e) => this.handleCheckbox("project_name", e)}
                   options={options}
                 />
               </FormControl>
             </Grid>
-
-            
           </Grid>
+          <Grid container direction={"row"} xs={12}  className="mt-30">
+            <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+              <form  autoComplete="off" className="fullw">
+
+                <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="project_desc" label="Project description " variant="outlined" required />
+              </form>
+            </Grid>
+            <Grid item xs={12} md={5} className="p-12">
+              <FormControl variant="outlined" className="rightselect" >
+                <MultipleSelect
+
+                  className="multiSelect"
+                  isMulti={true}
+                  onChange={(e) => this.handleCheckbox("project_desc", e)}
+                  options={options}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid container direction={"row"} xs={12} className="mt-30">
+                <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" justify="space-between">
+                  <Grid item xs={5}   >
+        
+                    <FormControl autoComplete="off" className="fullw">
+        
+                      <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_from" label="From" variant="outlined" required />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={5}  >
+                    <FormControl autoComplete="off" className="fullw">
+        
+                      <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_to" label="To" variant="outlined" required />
+                    </FormControl>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} md={5} className="p-12">
+                  <FormControl variant="outlined" className="rightselect" >
+                    <MultipleSelect
+        
+                      className="multiSelect"
+                      isMulti={true}
+                      onChange={(e) => {
+                        this.handleCheckbox("dt_from", e)
+                        this.handleCheckbox("dt_to", e)
+                      }}
+                      options={options}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+    <Paper elevation={3} className="paper-container margintop30">
+    <h5 className="m-30 color p-12">Skill gained</h5>
+      <Grid container>
+        <div>
+
+          {
+
+            this.state.skill_gained.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
+              <Grid item>
+                <h6> {item}</h6>
+              </Grid>
+
+             
+              <Grid item>
+                <Button onClick={() => this.deleteSkill(item)} variant="contained" color="secondary"> delete </Button>
+              </Grid>
+            </Grid>)
+          }
+        </div>
+       {this.state.enabled_skill&&
+       
+       <Grid container direction={"row"} xs={12} className={`mt-30 `}>
+       <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
+         <FormControl autoComplete="off" className="fullw">
+
+           <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="skill" label="skill" variant="outlined" required />
+         </FormControl>
+       </Grid>
+       <Grid item xs={12} md={5} className="p-12">
+         <FormControl variant="outlined" className="rightselect" >
+           <MultipleSelect
+
+             className="multiSelect"
+             isMulti={true}
+             onChange={(e) => this.handleCheckbox("skill_gained", e)}
+             options={options}
+           />
+         </FormControl>
+       </Grid>
+
+       
+     </Grid>
+       
+       }
 
 
 
-          {this.state.enabled_skill?<Button onClick={this.addSkill} className="mb20 bgc ml-25 " variant="contained"   >add gained skill</Button>:<div onClick={()=>this.setState({enabled_skill:true})} className="add-tag">new gained skills</div>}
+        {this.state.enabled_skill?<Button onClick={this.addSkill} className="mb20 bgc ml-25 " variant="contained"   >add gained skill</Button>:this.state.skill_gained.length<5&&<div onClick={()=>this.setState({enabled_skill:true})} className="add-tag">new gained skills</div>}
 
 
-        </Grid>
-      </Paper>
-   
-                    </Grid>
-                    </div>
+      </Grid>
+    </Paper>
+ 
+                  </Grid>
+                  </div>
+      
+      
+      }
                     <div className="fullw marginbottom50 margintop30">
-                    {this.state.enabled?<Button onClick={this.addProjectToArray} className="bgc  fullw" variant="contained"   >add Project</Button>:<div onClick={()=>this.setState({enabled:false})} className="add-tag">new projects</div>}
+                    {this.state.enabled?<Button onClick={this.addProjectToArray} className="bgc  fullw" variant="contained"   >add Project</Button>:this.state.project.length<5&&<div onClick={()=>this.setState({enabled:false})} className="add-tag">new projects</div>}
                     </div>
                   <div className="form-input-flex d-flex center">
            
@@ -419,7 +427,7 @@ skill_Array.push(this.state.skill)
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se d-flex mt-4">
                       {/* <button className="btn btn-purpal">Back</button> */}
-                      <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+                      <button className="btn btn-green ml-auto" disabled={loading}>
                         {loading ? "Next....." : "Next"}
                       </button>
                     

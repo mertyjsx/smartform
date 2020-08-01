@@ -3,6 +3,7 @@ import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
 import { Grid, Button, FormGroup, Paper } from "@material-ui/core"
 import FormControl from '@material-ui/core/FormControl';
+import {Alert } from "@material-ui/lab"
 const options2 = [
   { value: ' graduated', label: ' graduated' },
   { value: 'incomplete', label: 'incomplete' },
@@ -21,7 +22,7 @@ export default function Employmentcomponent({ handleCheckbox,
   const [employment, set_employment] = useState({})
   const [skills, set_skills] = useState([])
   const [details, set_details] = useState([])
- 
+  const [errors, set_error] = useState("")
   const [detail, set_detail] = useState("")
   const [skill, set_skill] = useState("")
   
@@ -43,15 +44,33 @@ export default function Employmentcomponent({ handleCheckbox,
   
   const addEmployment = (e) => {
     e.preventDefault();
-let employment_object={
-  ...employment,
-  skill_gained:skills,
+    let error=false
+    if(!employment.employer_name){
+      error=true
+      set_error("employer_name can not be empty")
+      
+      }
+      
+      if(!employment.job_title){
+        error=true
+        set_error("job_title can not be empty")
+        
+        }
 
-  job_details: details,
-  
-}
-    add(employment_object)
-    set_enabled(false)
+        if(!error){
+          let employment_object={
+            ...employment,
+            skill_gained:skills,
+          
+            job_details: details,
+            
+          }
+              add(employment_object)
+              set_enabled(false)
+              set_error("")
+
+        }
+
   }
   const addSkill = (e) => {
     e.preventDefault();
@@ -109,8 +128,9 @@ const  deleteSkill = () => {
           </Grid>)
         }
       </div>
+{enabled&&
 
-<div className={`${!enabled&&"unvisible"}`}>
+<div >
 
 <Grid container direction={"row"} xs={12} className="mt-30">
         <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
@@ -261,31 +281,34 @@ const  deleteSkill = () => {
               </Grid>)
             }
           </div>
-          <Grid container direction={"row"} xs={12} className={`mt-30 ${!enabled_detail&&"unvisible"}`}>
-            <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
-              <FormControl autoComplete="off" className="fullw">
+         {enabled_detail&&
+          <Grid container direction={"row"} xs={12} className={`mt-30`}>
+          <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
+            <FormControl autoComplete="off" className="fullw">
 
-                <TextField className="fullw" onChange={handleDetail} id="outlined-basic" name="job_detail" label="job_detail" variant="outlined" required />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} md={5} className="p-12">
-              <FormControl variant="outlined" className="rightselect" >
-                <MultipleSelect
+              <TextField className="fullw" onChange={handleDetail} id="outlined-basic" name="job_detail" label="job_detail" variant="outlined" required />
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={5} className="p-12">
+            <FormControl variant="outlined" className="rightselect" >
+              <MultipleSelect
 
-                  className="multiSelect"
-                  isMulti={true}
-                  onChange={(e) => handleCheckbox("job_detail", e)}
-                  options={options}
-                />
-              </FormControl>
-            </Grid>
-
-            
+                className="multiSelect"
+                isMulti={true}
+                onChange={(e) => handleCheckbox("job_detail", e)}
+                options={options}
+              />
+            </FormControl>
           </Grid>
 
+          
+        </Grid>
+
+         
+         }
 
 
-          {enabled_detail?<Button onClick={addDetail} className="mb20 bgc ml-25 " variant="contained"   >add</Button>:<div onClick={()=>set_enabled_detail(true)} className="add-tag">new detail</div>}
+          {enabled_detail?<Button onClick={addDetail} className="mb20 bgc ml-25 " variant="contained"   >add</Button>:details.length<3&&<div onClick={()=>set_enabled_detail(true)} className="add-tag">new detail</div>}
 
 
         </Grid>
@@ -309,31 +332,34 @@ const  deleteSkill = () => {
               </Grid>)
             }
           </div>
-          <Grid container direction={"row"} xs={12} className={`mt-30 ${!enabled_skill&&"unvisible"}`}>
-            <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
-              <FormControl autoComplete="off" className="fullw">
+         {enabled_skill&&
+          <Grid container direction={"row"} xs={12} className={`mt-30 `}>
+          <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
+            <FormControl autoComplete="off" className="fullw">
 
-                <TextField className="fullw" onChange={handleSkill} id="outlined-basic" name="skill_gained " label="skill_gained" variant="outlined" required />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} md={5} className="p-12">
-              <FormControl variant="outlined" className="rightselect" >
-                <MultipleSelect
+              <TextField className="fullw" onChange={handleSkill} id="outlined-basic" name="skill_gained " label="skill_gained" variant="outlined" required />
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={5} className="p-12">
+            <FormControl variant="outlined" className="rightselect" >
+              <MultipleSelect
 
-                  className="multiSelect"
-                  isMulti={true}
-                  onChange={(e) => handleCheckbox("skill_gained", e)}
-                  options={options}
-                />
-              </FormControl>
-            </Grid>
-
-            
+                className="multiSelect"
+                isMulti={true}
+                onChange={(e) => handleCheckbox("skill_gained", e)}
+                options={options}
+              />
+            </FormControl>
           </Grid>
 
+          
+        </Grid>
+
+         
+         }
 
 
-          {enabled_skill?<Button onClick={addSkill} className="mb20 bgc ml-25 " variant="contained"   >add</Button>:<div onClick={()=>set_enabled_skill(true)} className="add-tag">new skill</div>}
+          {enabled_skill?<Button onClick={addSkill} className="mb20 bgc ml-25 " variant="contained"   >add</Button>:skills.length<5&&<div onClick={()=>set_enabled_skill(true)} className="add-tag">new skill</div>}
 
 
         </Grid>
@@ -341,6 +367,11 @@ const  deleteSkill = () => {
     
 
       </div>
+
+
+
+}
+      {errors&&<Alert className="mb20" severity="error">{errors}</Alert>}
       {enabled? <Button onClick={addEmployment} className="fullw bgc" variant="contained"  >add Employment</Button>:<div onClick={()=>set_enabled(true)} className="add-tag">new Employment</div>}
      
    

@@ -223,10 +223,10 @@ class ProfilePersonalPage extends React.Component {
             <h5 className="m-30">Name </h5>           
              <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+                <FormControl  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="first_name" label="First name" variant="outlined" required />
-                </form>
+                </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
                 <FormControl variant="outlined" className="rightselect" >
@@ -242,10 +242,10 @@ class ProfilePersonalPage extends React.Component {
             </Grid>
             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
-                <form  autoComplete="off" className="fullw">
+                <FormControl  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="middle_name" label="Middle name" variant="outlined" required />
-                </form>
+                </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
                 <FormControl variant="outlined" className="rightselect" >
@@ -261,10 +261,10 @@ class ProfilePersonalPage extends React.Component {
             </Grid>
             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" className="p-12" >
-                <form noValidate autoComplete="off" className="fullw">
+                <FormControl  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="last_name" label="last_name" variant="outlined" required />
-                </form>
+                </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12" className="p-12">
                 <FormControl variant="outlined" className="rightselect" >
@@ -280,10 +280,10 @@ class ProfilePersonalPage extends React.Component {
             </Grid>
             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form noValidate autoComplete="off" className="fullw">
+                <FormControl  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="preferred_name" label="preferred_name" variant="outlined" required />
-                </form>
+                </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
                 <FormControl variant="outlined" className="rightselect" >
@@ -301,10 +301,10 @@ class ProfilePersonalPage extends React.Component {
             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30" >
               <Grid container xs={12} md={7} alignItems="center" alignContent="center" direction="row" className="p-12">
                 <Grid item xs={7}>
-                  <form noValidate className="fullw">
+                  <FormControl  className="fullw">
 
                     <TextField className="fullw" type="tel" onChange={this.handleChange} id="outlined-basic" name="phone_number" label="phone_number" variant="outlined" required />
-                  </form>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={5}>
                   <MultipleSelect
@@ -335,10 +335,10 @@ class ProfilePersonalPage extends React.Component {
             <h5 className="m-30">Adress information</h5> 
             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                <form noValidate autoComplete="off" className="fullw">
+                <FormControl  autoComplete="off" className="fullw">
 
                   <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="address" label="address" variant="outlined" required />
-                </form>
+                </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
                 <FormControl variant="outlined" className="rightselect" >
@@ -354,10 +354,10 @@ class ProfilePersonalPage extends React.Component {
               </Grid>
               <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
                 <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                  <form noValidate autoComplete="off" className="fullw">
+                  <FormControl  autoComplete="off" className="fullw">
 
                     <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="zip_code" label="zip_code" variant="outlined" required />
-                  </form>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12} md={5} className="p-12">
                   <FormControl variant="outlined" className="rightselect" >
@@ -373,10 +373,10 @@ class ProfilePersonalPage extends React.Component {
                 </Grid>
                 <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
                   <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                    <form noValidate autoComplete="off" className="fullw">
+                    <FormControl  autoComplete="off" className="fullw">
 
                       <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="city" label="city" variant="outlined" required />
-                    </form>
+                    </FormControl>
                   </Grid>
                   <Grid item xs={12} md={5} className="p-12">
                     <FormControl variant="outlined" className="rightselect" >
@@ -392,10 +392,10 @@ class ProfilePersonalPage extends React.Component {
                   </Grid>
                   <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                      <form noValidate autoComplete="off" className="fullw">
+                      <FormControl  autoComplete="off" className="fullw">
 
                         <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="state" label="state" variant="outlined" required />
-                      </form>
+                      </FormControl>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12">
                       <FormControl variant="outlined" className="rightselect" >
@@ -411,10 +411,10 @@ class ProfilePersonalPage extends React.Component {
                     </Grid>
                     <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
                       <Grid container xs={12} md={7} alignItems="center" alignContent="center"  className="p-12" >
-                        <form noValidate autoComplete="off" className="fullw">
+                        <FormControl  autoComplete="off" className="fullw">
 
                           <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="country" label="country" variant="outlined" required />
-                        </form>
+                        </FormControl>
                       </Grid>
                       <Grid item xs={12} md={5}  className="p-12">
                         <FormControl variant="outlined" className="rightselect" >
@@ -446,8 +446,9 @@ class ProfilePersonalPage extends React.Component {
                   </div>
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se d-flex mt-4">
+                   
                       {/* <button className="btn btn-purpal">Back</button> */}
-                      <button className="btn btn-green ml-auto" disabled={loading}>
+                      <button tpye="submit" className="btn btn-green ml-auto" disabled={loading}>
                         {loading ? "Next....." : "Next"}
                       </button>
                     </div>
