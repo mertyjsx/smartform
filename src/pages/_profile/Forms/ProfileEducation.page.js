@@ -1,5 +1,5 @@
 import React from "react";
-import { personalProfileData } from "../../_services/profile.service";
+import { profileEducationData } from "../../_services/education.service";
 import { Grid } from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -59,7 +59,7 @@ class ProfilePersonalPage extends React.Component {
       error: "",
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangePublic = this.handleChangePublic.bind(this);
+   
     this.handleChangePrivate = this.handleChangePrivate.bind(this);
     this.handleChangeResume = this.handleChangeResume.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,24 +71,13 @@ class ProfilePersonalPage extends React.Component {
   }
 
 
-
-
-
-
-
-
-  handleChangePublic(name, which) {
-
-  }
-
-
   handleCheckbox = (name, e) => {
     let array = e ? e : []
-    console.log(array)
+ 
     let isPublic = array.find(item => item.value === "public")
     let isPrivate = array.find(item => item.value === "private")
     let isResume = array.find(item => item.value === "resume")
-    console.log(isPublic)
+   
 
     if (isPublic) {
 
@@ -103,9 +92,6 @@ class ProfilePersonalPage extends React.Component {
         publicVar.push(name)
         this.setState({ public: publicVar });
       }
-
-
-
 
 
     } else {
@@ -167,65 +153,48 @@ class ProfilePersonalPage extends React.Component {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-    array.map((which) => {
-
-
-
-
-
-    })
-
-
-    // this.setState({ [name]: value });
   }
 
   handleChangePrivate(e) {
     const { name, value } = e.target;
-    console.log("Private -- ", name, " == ", value);
+ 
     // this.setState({ [name]: value });
   }
 
   handleChangeResume(e) {
     const { name, value } = e.target;
-    console.log("Resume -- ", name, " == ", value);
+   
     // this.setState({ [name]: value });
   }
 
-  addSchoolToArray=(school)=>{
+  addSchoolToArray = (school) => {
 
-let school_array=this.state.universty
+    let school_array = this.state.universty
 
-school_array.push(school)
-this.setState({universty:school_array})
-
-  }
-
-  delete=(school)=>{
-    let school_array=this.state.universty.filter(item=>item!==school)
-
-
-this.setState({universty:school_array})
+    school_array.push(school)
+    this.setState({ universty: school_array })
 
   }
+
+
+
+  delete = (school) => {
+    let school_array = this.state.universty.filter(item => item !== school)
+
+
+    this.setState({ universty: school_array })
+
+  }
+  
   // USING METHOD TO SUMBIT FORM DETAILS TO SERVER
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
 
-    personalProfileData(this.state).then(
+    profileEducationData(this.state).then(
       (response) => {
         if (response.success) {
-          this.props.profileThis.setState({ activeMenu: "Education" });
+          this.props.profileThis.setState({ activeMenu: "Experience" });
         } else {
           this.setState({ loading: false });
         }
@@ -235,19 +204,19 @@ this.setState({universty:school_array})
   }
 
   render() {
-    console.log(this.state)
+ 
     const { loading, error } = this.state;
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
-          <Grid container direction="column" className="m-20">
+          <Grid container direction="column" justify="center">
             <h5 className="m-30">High School </h5>
-         
+
             {
               !this.state.high_school_enabled ? (<h3 className="add-tag" onClick={() => this.setState({ high_school_enabled: true })}>Add High School</h3>) : (
                 [
 
-                  <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                  <Grid container direction={"row"} xs={12}  className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
@@ -266,7 +235,7 @@ this.setState({universty:school_array})
                       </FormControl>
                     </Grid>
                   </Grid>,
-                  <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                  <Grid container direction={"row"} xs={12}  className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
@@ -285,14 +254,14 @@ this.setState({universty:school_array})
                       </FormControl>
                     </Grid>
                   </Grid>,
-                  <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
-                    <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" className="p-12" >
+                  <Grid container direction={"row"} xs={12}  className="mt-30">
+                    <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center"  >
                       <form noValidate autoComplete="off" className="fullw">
 
                         <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_state" label="State" variant="outlined" required />
                       </form>
                     </Grid>
-                    <Grid item xs={12} md={5} className="p-12" className="p-12">
+                    <Grid item xs={12} md={5} className="p-12">
                       <FormControl variant="outlined" className="rightselect" >
                         <MultipleSelect
 
@@ -304,14 +273,14 @@ this.setState({universty:school_array})
                       </FormControl>
                     </Grid>
                   </Grid>,
-                  <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+                  <Grid container direction={"row"} xs={12}  className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
                         <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_country" label="Country" variant="outlined" required />
                       </form>
                     </Grid>
-                    <Grid item xs={12} md={5} className="p-12">
+                    <Grid item xs={12} md={5} className="p-12 ">
                       <FormControl variant="outlined" className="rightselect" >
                         <MultipleSelect
 
@@ -322,7 +291,38 @@ this.setState({universty:school_array})
                         />
                       </FormControl>
                     </Grid>
+                  </Grid>,
+                  <Grid container direction={"row"} xs={12} className="mt-30">
+                  <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" justify="space-between">
+                    <Grid item xs={5}   >
+          
+                      <FormControl autoComplete="off" className="fullw">
+          
+                        <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_from" label="From" variant="outlined" required />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={5}  >
+                      <FormControl autoComplete="off" className="fullw">
+          
+                        <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_to" label="To" variant="outlined" required />
+                      </FormControl>
+                    </Grid>
                   </Grid>
+                  <Grid item xs={12} md={5} className="p-12">
+                    <FormControl variant="outlined" className="rightselect" >
+                      <MultipleSelect
+          
+                        className="multiSelect"
+                        isMulti={true}
+                        onChange={(e) => {
+                          this.handleCheckbox("high_school_from", e)
+                          this.handleCheckbox("high_school_to", e)
+                        }}
+                        options={options}
+                      />
+                    </FormControl>
+                  </Grid>
+                </Grid>
 
                 ]
               )
@@ -330,7 +330,9 @@ this.setState({universty:school_array})
 
             }
             <h5 className="m-30">Universty</h5>
-            <Univertsy handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray}></Univertsy>
+            <Univertsy 
+          
+            handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray}></Univertsy>
           </Grid>
           <div className="form-input-flex d-flex center">
             <div className="left-input-se">
@@ -349,9 +351,13 @@ this.setState({universty:school_array})
           <div className="form-input-flex d-flex center">
             <div className="left-input-se d-flex mt-4">
               {/* <button className="btn btn-purpal">Back</button> */}
-              <button className="btn btn-green ml-auto" disabled={loading}>
-                {loading ? "Next....." : "Next"}
-              </button>
+              {this.state.universty.length>0&&
+               <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+               {loading ? "Next....." : "Next"}
+             </button>
+              
+              }
+             
             </div>
           </div>
 

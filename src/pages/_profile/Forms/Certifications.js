@@ -1,6 +1,6 @@
 import React from "react";
-import { EmploymentData} from "../../_services/employment.service";
-import { Grid ,Radio,FormControlLabel,FormLabel,RadioGroup} from "@material-ui/core"
+import {certificateData } from "../../_services/other.services";
+import { Grid } from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,6 @@ import Multi from "../../_components/MultipleSelect"
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
-import Employment from "./Employment.component"
 import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -26,22 +25,20 @@ const phoneTypes = [
   { value: 'home', label: 'Home' }
 ]
 
-
-
-
 class ProfilePersonalPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       loading: false,
-     enable:false,
-     employment:[],
-    
+      Certification:[],
+      certificate_name:"",
+      date_issue:"",
       public: [],
       private: [],
       resume: [],
       error: "",
+      enabled:true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangePublic = this.handleChangePublic.bind(this);
@@ -56,29 +53,27 @@ class ProfilePersonalPage extends React.Component {
   }
 
 
-enableChange=(e)=>{
-this.setState({enable:e.target.value})
-}
 
 
-addEmploymentToArray = (employment) => {
+  addCToArray = () => {
 
-  let employment_array = this.state.employment
+    let c_array = this.state.Certification
+  
+    c_array.push({certificate_name:this.state.certificate_name,date_issue:this.state.date_issue})
+    this.setState({Certification: c_array })
+  
+  }
+  
+  
+  
+  delete = (c) => {
+    let c_array = this.state.Certification.filter(item => item !==c)
+  
+  
+    this.setState({ Certification: c_array })
+  
+  }
 
-  employment_array.push(employment)
-  this.setState({ employment: employment_array })
-
-}
-
-
-
-delete = (employment) => {
-  let employment_Array = this.state.employment.filter(item => item !==employment)
-
-
-  this.setState({ employment: employment_Array })
-
-}
 
 
 
@@ -205,18 +200,16 @@ delete = (employment) => {
     console.log("Resume -- ", name, " == ", value);
     // this.setState({ [name]: value });
   }
-justSkip=()=>{
-  this.props.profileThis.setState({ activeMenu: "Certifications" });
-}
+
   // USING METHOD TO SUMBIT FORM DETAILS TO SERVER
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
 
-    EmploymentData(this.state).then(
+    certificateData(this.state).then(
       (response) => {
         if (response.success) {
-          this.props.profileThis.setState({ activeMenu: "Certifications" });
+          this.props.profileThis.setState({ activeMenu: "Skills" });
         } else {
           this.setState({ loading: false });
         }
@@ -231,29 +224,72 @@ justSkip=()=>{
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
-          
-       
-      <FormControl component="fieldset" className="fullw mt-30 m-20" >
-      <h5 component="experience" className="experience-text m-30">Do you have any work experience?</h5>
-      <RadioGroup aria-label="experience" className="rowflex"  name="experience" value={this.state.enable}  onChange={this.enableChange}>
-      
-        <FormControlLabel className="radiowidth" value={"yes"} control={<Radio />} label="Yes" />
-        <FormControlLabel  className="radiowidth" value={"no"} control={<Radio />} label="No" />
-       
-      </RadioGroup>
-    </FormControl>
-            
-          
-          
-        {this.state.enable==="yes"&&
-        (
-<Employment handleCheckbox={this.handleCheckbox} add={this.addEmploymentToArray} deleteEmployment={this.delete} employments={this.state.employment}></Employment>
 
-        )
-        
-        
-        
-        }
+        <div>
+
+{
+
+  this.state.Certification.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
+    <Grid item>
+      <h6> name : {item.certificate_name}</h6>
+    </Grid>
+
+    
+    <Grid item>
+      <Button onClick={() => this.delete(item)} variant="contained" color="secondary"> delete </Button>
+    </Grid>
+  </Grid>)
+}
+</div>
+          
+        <div className={`${!this.state.enabled&&"unvisible"}`}>
+          
+          
+          
+          <Grid container direction="column" className="m-20">
+            <h5 className="m-30">Certifications  </h5>           
+             <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
+                <form  autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="certificate_name" label="Certificate name" variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("certificate_name", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+            <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">
+              <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
+                <form  autoComplete="off" className="fullw">
+
+                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="date_issue" label="Date issue " variant="outlined" required />
+                </form>
+              </Grid>
+              <Grid item xs={12} md={5} className="p-12">
+                <FormControl variant="outlined" className="rightselect" >
+                  <MultipleSelect
+
+                    className="multiSelect"
+                    isMulti={true}
+                    onChange={(e) => this.handleCheckbox("date_issue", e)}
+                    options={options}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+   
+                    </Grid>
+                    </div>
+                    {this.state.enabled?<Button onClick={this.addCToArray} className="mb20 bgc ml-25 " variant="contained"   >add certification</Button>:<div onClick={()=>this.setState({enabled:false})} className="add-tag">new certification</div>}
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se">
                       <div className="progress">
@@ -271,34 +307,13 @@ justSkip=()=>{
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se d-flex mt-4">
                       {/* <button className="btn btn-purpal">Back</button> */}
+                      <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
+                        {loading ? "Next....." : "Next"}
+                      </button>
                     
-                    {this.state.enable==="yes"?(
-                  
-                  this.state.employment.length>0&&(
-
-                  
-                    <button onClick={this.handleSubmit} className="btn btn-green ml-auto" disabled={loading}>
-                    {loading ? "Next....." : "Next"}
-                  </button>
-                   
-                   
-                
-                
-                )
-                  
-                  )
-                  :
-                   
-                    <button className="btn btn-green ml-auto" type="button" onClick={this.justSkip}>
-                   Next
-                  </button>
-                  }
-                    
-                     
-                    </div>
                   </div>
                       
-                    
+                  </div>   
         </form>
       </div>
     );

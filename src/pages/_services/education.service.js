@@ -1,28 +1,26 @@
 import { getToken } from "./user.service";
 
 // USING METHOD TO SUBMIT USER PERSONAL DATA
-export const personalProfileData = async (fieldsState) => {
+export const profileEducationData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
-    first_name: fieldsState.first_name,
-    middle_name: fieldsState.middle_name,
-    last_name: fieldsState.last_name,
-    pri: fieldsState.private,
+    school_name: fieldsState.high_school_name,
+   city: fieldsState.high_school_city,
+    state: fieldsState.high_school_state,
+   country: fieldsState.high_school_country,
+   dt_from: fieldsState.high_school_from,
+   dt_to: fieldsState.high_school_to,
+   university:JSON.stringify(fieldsState.universty),
+   pri: fieldsState.private,
     resume: fieldsState.resume,
     pub: fieldsState.public,
 
-    address: fieldsState.address,
-    zip_code: fieldsState.zip_code,
-    city: fieldsState.city,
-    state: fieldsState.state,
-    country: fieldsState.country,
-    phone_number: fieldsState.phone_number,
-    phone_type:fieldsState.phone_type,
-    preferred_first_name:fieldsState.preferred_name
   };
+
+ console.log(dataArray)
   const formBody = handleFormRequest(dataArray);
 
-  return fetch(apiUrl + "user/personal", {
+  return fetch(apiUrl + "user/education", {
     method: "POST",
     headers: {
       "Authorization": "Bearer "+getToken(),
@@ -32,6 +30,7 @@ export const personalProfileData = async (fieldsState) => {
   })
     .then((response) => response.json())
     .then((responseData) => {
+      console.log(responseData)
       if (!responseData.success) {
         alert(responseData.msg);
       } else {

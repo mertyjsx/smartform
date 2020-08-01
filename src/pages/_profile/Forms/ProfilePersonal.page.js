@@ -34,6 +34,7 @@ class ProfilePersonalPage extends React.Component {
       first_name: "",
       middle_name: "",
       last_name: "",
+      preferred_name:"",
       email: "",
       address: "",
       zip_code: "",
@@ -213,6 +214,11 @@ class ProfilePersonalPage extends React.Component {
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
+          
+          
+          
+          
+          
           <Grid container direction="column" className="m-20">
             <h5 className="m-30">Name </h5>           
              <Grid container direction={"row"} xs={12} spacing={3} className="mt-30">

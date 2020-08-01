@@ -1,28 +1,19 @@
 import { getToken } from "./user.service";
 
 // USING METHOD TO SUBMIT USER PERSONAL DATA
-export const personalProfileData = async (fieldsState) => {
+export const EmploymentData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
-    first_name: fieldsState.first_name,
-    middle_name: fieldsState.middle_name,
-    last_name: fieldsState.last_name,
+    employment:fieldsState.employment,
     pri: fieldsState.private,
     resume: fieldsState.resume,
     pub: fieldsState.public,
-
-    address: fieldsState.address,
-    zip_code: fieldsState.zip_code,
-    city: fieldsState.city,
-    state: fieldsState.state,
-    country: fieldsState.country,
-    phone_number: fieldsState.phone_number,
-    phone_type:fieldsState.phone_type,
-    preferred_first_name:fieldsState.preferred_name
   };
+
+ 
   const formBody = handleFormRequest(dataArray);
 
-  return fetch(apiUrl + "user/personal", {
+  return fetch(apiUrl + "user/experience", {
     method: "POST",
     headers: {
       "Authorization": "Bearer "+getToken(),
