@@ -269,13 +269,13 @@ set_honors(honor_array)
 
       <FormControl autoComplete="off" className="fullw">
 
-        <TextField className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="u_from" label="From" variant="outlined" required />
+        <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="u_from" label="From" variant="outlined" required />
       </FormControl>
     </Grid>
     <Grid item xs={5}  >
       <FormControl autoComplete="off" className="fullw">
 
-        <TextField className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="u_to" label="To" variant="outlined" required />
+        <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="u_to" label="To" variant="outlined" required />
       </FormControl>
     </Grid>
   </Grid>

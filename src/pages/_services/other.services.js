@@ -4,7 +4,7 @@ import { getToken } from "./user.service";
 export const certificateData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
-    certification:fieldsState.Certification,
+    certification:JSON.stringify(fieldsState.Certification),
    pri: fieldsState.private,
     resume: fieldsState.resume,
     pub: fieldsState.public,
@@ -40,7 +40,7 @@ export const certificateData = async (fieldsState) => {
 export const interestData = async (fieldsState) => {
     const apiUrl = global.config.apiBaseURL.url;
     let dataArray = {
-        Interest:fieldsState.Interest,
+        Interest:JSON.stringify(fieldsState.Interest),
      pri: fieldsState.private,
       resume: fieldsState.resume,
       pub: fieldsState.public,
@@ -75,7 +75,7 @@ export const interestData = async (fieldsState) => {
   export const skillData = async (fieldsState) => {
     const apiUrl = global.config.apiBaseURL.url;
     let dataArray = {
-      skills:fieldsState.skills,
+      skills:JSON.stringify(fieldsState.skills),
      pri: fieldsState.private,
       resume: fieldsState.resume,
       pub: fieldsState.public,
@@ -110,7 +110,7 @@ export const interestData = async (fieldsState) => {
   export const projectData = async (fieldsState) => {
     const apiUrl = global.config.apiBaseURL.url;
     let dataArray = {
-      project:fieldsState.project,
+      project:JSON.stringify(fieldsState.project),
      pri: fieldsState.private,
       resume: fieldsState.resume,
       pub: fieldsState.public,

@@ -59,7 +59,7 @@ class ProfilePersonalPage extends React.Component {
       error: "",
     };
     this.handleChange = this.handleChange.bind(this);
-   
+
     this.handleChangePrivate = this.handleChangePrivate.bind(this);
     this.handleChangeResume = this.handleChangeResume.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -73,11 +73,11 @@ class ProfilePersonalPage extends React.Component {
 
   handleCheckbox = (name, e) => {
     let array = e ? e : []
- 
+
     let isPublic = array.find(item => item.value === "public")
     let isPrivate = array.find(item => item.value === "private")
     let isResume = array.find(item => item.value === "resume")
-   
+
 
     if (isPublic) {
 
@@ -157,13 +157,13 @@ class ProfilePersonalPage extends React.Component {
 
   handleChangePrivate(e) {
     const { name, value } = e.target;
- 
+
     // this.setState({ [name]: value });
   }
 
   handleChangeResume(e) {
     const { name, value } = e.target;
-   
+
     // this.setState({ [name]: value });
   }
 
@@ -185,7 +185,7 @@ class ProfilePersonalPage extends React.Component {
     this.setState({ universty: school_array })
 
   }
-  
+
   // USING METHOD TO SUMBIT FORM DETAILS TO SERVER
   handleSubmit(e) {
     e.preventDefault();
@@ -205,7 +205,7 @@ class ProfilePersonalPage extends React.Component {
   }
 
   render() {
- 
+
     const { loading, error } = this.state;
     return (
       <div className="pro-right-in">
@@ -217,9 +217,9 @@ class ProfilePersonalPage extends React.Component {
               !this.state.high_school_enabled ? (<h3 className="add-tag" onClick={() => this.setState({ high_school_enabled: true })}>Add High School</h3>) : (
                 [
 
-                  <Grid container direction={"row"} xs={12}  className="mt-30">
+                  <Grid container direction={"row"} xs={12} className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
-                      <FormControl  autoComplete="off" className="fullw">
+                      <FormControl autoComplete="off" className="fullw">
 
                         <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_name" label="School name" variant="outlined" required />
                       </FormControl>
@@ -236,7 +236,7 @@ class ProfilePersonalPage extends React.Component {
                       </FormControl>
                     </Grid>
                   </Grid>,
-                  <Grid container direction={"row"} xs={12}  className="mt-30">
+                  <Grid container direction={"row"} xs={12} className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
@@ -255,7 +255,7 @@ class ProfilePersonalPage extends React.Component {
                       </FormControl>
                     </Grid>
                   </Grid>,
-                  <Grid container direction={"row"} xs={12}  className="mt-30">
+                  <Grid container direction={"row"} xs={12} className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center"  >
                       <form noValidate autoComplete="off" className="fullw">
 
@@ -274,7 +274,7 @@ class ProfilePersonalPage extends React.Component {
                       </FormControl>
                     </Grid>
                   </Grid>,
-                  <Grid container direction={"row"} xs={12}  className="mt-30">
+                  <Grid container direction={"row"} xs={12} className="mt-30">
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
@@ -294,36 +294,36 @@ class ProfilePersonalPage extends React.Component {
                     </Grid>
                   </Grid>,
                   <Grid container direction={"row"} xs={12} className="mt-30">
-                  <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" justify="space-between">
-                    <Grid item xs={5}   >
-          
-                      <FormControl autoComplete="off" className="fullw">
-          
-                        <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_from" label="From" variant="outlined" required />
-                      </FormControl>
+                    <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" justify="space-between">
+                      <Grid item xs={5}   >
+
+                        <FormControl autoComplete="off" className="fullw">
+
+                          <TextField  InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_from" label="From" variant="outlined" required />
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={5}  >
+                        <FormControl autoComplete="off" className="fullw">
+
+                          <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_to" label="To" variant="outlined" required />
+                        </FormControl>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={5}  >
-                      <FormControl autoComplete="off" className="fullw">
-          
-                        <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_to" label="To" variant="outlined" required />
+                    <Grid item xs={12} md={5} className="p-12">
+                      <FormControl variant="outlined" className="rightselect" >
+                        <MultipleSelect
+
+                          className="multiSelect"
+                          isMulti={true}
+                          onChange={(e) => {
+                            this.handleCheckbox("high_school_from", e)
+                            this.handleCheckbox("high_school_to", e)
+                          }}
+                          options={options}
+                        />
                       </FormControl>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} md={5} className="p-12">
-                    <FormControl variant="outlined" className="rightselect" >
-                      <MultipleSelect
-          
-                        className="multiSelect"
-                        isMulti={true}
-                        onChange={(e) => {
-                          this.handleCheckbox("high_school_from", e)
-                          this.handleCheckbox("high_school_to", e)
-                        }}
-                        options={options}
-                      />
-                    </FormControl>
-                  </Grid>
-                </Grid>
 
                 ]
               )
@@ -331,9 +331,9 @@ class ProfilePersonalPage extends React.Component {
 
             }
             <h5 className="m-30">Universty</h5>
-            <Univertsy 
-          
-            handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray}></Univertsy>
+            <Univertsy
+
+              handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray}></Univertsy>
           </Grid>
           <div className="form-input-flex d-flex center">
             <div className="left-input-se">
@@ -352,13 +352,13 @@ class ProfilePersonalPage extends React.Component {
           <div className="form-input-flex d-flex center">
             <div className="left-input-se d-flex mt-4">
               {/* <button className="btn btn-purpal">Back</button> */}
-              {this.state.universty.length>0&&
-               <button  className="btn btn-green ml-auto" disabled={loading}>
-               {loading ? "Next....." : "Next"}
-             </button>
-              
+              {this.state.universty.length > 0 &&
+                <button className="btn btn-green ml-auto" disabled={loading}>
+                  {loading ? "Next....." : "Next"}
+                </button>
+
               }
-             
+
             </div>
           </div>
 

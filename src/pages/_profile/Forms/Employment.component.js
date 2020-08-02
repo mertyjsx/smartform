@@ -68,6 +68,8 @@ export default function Employmentcomponent({ handleCheckbox,
               add(employment_object)
               set_enabled(false)
               set_error("")
+              set_skills([])
+              set_details([])
 
         }
 
@@ -235,13 +237,13 @@ const  deleteSkill = () => {
           
                       <FormControl autoComplete="off" className="fullw">
           
-                        <TextField className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="employment_from" label="From" variant="outlined" required />
+                        <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="employment_from" label="From" variant="outlined" required />
                       </FormControl>
                     </Grid>
                     <Grid item xs={5}  >
                       <FormControl autoComplete="off" className="fullw">
           
-                        <TextField className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="employment_to" label="To" variant="outlined" required />
+                        <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={handleChange} id="outlined-basic" name="employment_to" label="To" variant="outlined" required />
                       </FormControl>
                     </Grid>
                   </Grid>

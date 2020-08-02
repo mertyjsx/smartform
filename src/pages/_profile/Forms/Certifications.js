@@ -60,7 +60,7 @@ class ProfilePersonalPage extends React.Component {
     let c_array = this.state.Certification
   
     c_array.push({certificate_name:this.state.certificate_name,date_issue:this.state.date_issue})
-    this.setState({Certification: c_array })
+    this.setState({Certification: c_array ,enabled:false})
   
   }
   

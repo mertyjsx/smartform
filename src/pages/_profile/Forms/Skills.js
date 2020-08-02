@@ -70,7 +70,7 @@ class ProfilePersonalPage extends React.Component {
             experience_year:this.state.experience_year,
         }
     )
-    this.setState({skills: s_array })
+    this.setState({skills: s_array,enabled:false })
   
   }
   

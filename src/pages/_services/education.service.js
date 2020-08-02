@@ -32,12 +32,12 @@ export const profileEducationData = async (fieldsState) => {
   
   
   .then((responseData) => {
-    if (!responseData.success) {
+    if (!responseData.data.success) {
       alert(responseData.msg);
     } else {
-      alert(responseData.msg);
+      alert(responseData.data.msg);
     }
-    return responseData;
+    return responseData.data;
   })
   .catch((error) => {
     console.log(error)

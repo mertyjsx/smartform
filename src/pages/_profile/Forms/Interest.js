@@ -61,7 +61,7 @@ class ProfilePersonalPage extends React.Component {
   
     c_array.push({ interest_name:this.state.interest_name,
     interest_desc:this.state.interest_desc,})
-    this.setState({Interest: c_array })
+    this.setState({Interest: c_array ,enabled:false})
   
   }
   

@@ -83,7 +83,7 @@ skill_Array.push(this.state.skill)
       skill_gained:this.state.skill_gained,
         }
     )
-    this.setState({project: s_array })
+    this.setState({project: s_array,enabled:false ,skill_gained:[]})
   
   }
   
@@ -277,7 +277,7 @@ skill_Array.push(this.state.skill)
           
           
         <Grid container direction="column">
-          <h5 className="m-30">Skills </h5>           
+          <h5 className="m-30">Projects </h5>           
            <Grid container direction={"row"} xs={12}  className="mt-30">
             <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
               <form  autoComplete="off" className="fullw">
@@ -322,13 +322,13 @@ skill_Array.push(this.state.skill)
         
                     <FormControl autoComplete="off" className="fullw">
         
-                      <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_from" label="From" variant="outlined" required />
+                      <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_from" label="From" variant="outlined" required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={5}  >
                     <FormControl autoComplete="off" className="fullw">
         
-                      <TextField className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_to" label="To" variant="outlined" required />
+                      <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_to" label="To" variant="outlined" required />
                     </FormControl>
                   </Grid>
                 </Grid>
