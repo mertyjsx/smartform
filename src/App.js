@@ -9,7 +9,7 @@ import Login from "./pages/Login.page";
 import SignUp from "./pages/SignUp.page";
 import ForgotPassword from "./pages/ForgotPassword.page";
 import Verify from "./pages/Verify.page";
-
+import Contentpage from "./Admin/editContentpage"
 import HomePage from "./pages/Home.page";
 
 import ProfilePage from "./pages/Profile.page";
@@ -45,6 +45,7 @@ function App() {
       <AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
       <AdminPrivateRoute exact path="/admin/create-user" component={CreateUserPage} />
       <AdminPrivateRoute exact path="/admin/edit-user" component={EditUserPage} />
+      <AdminPrivateRoute exact path="/admin/edit-content" component={Contentpage} />
       <AdminPrivateRoute exact path="/admin/delete-user" component={DeleteUserPage} />
       <PrivateRoute exact path="/profile" component={ProfilePage} />
 
