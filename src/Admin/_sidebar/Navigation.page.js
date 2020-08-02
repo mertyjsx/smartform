@@ -1,6 +1,6 @@
 import React from "react";
 // import { getToken, logout } from "../_services/user.service";
-
+import {Link} from "react-router-dom"
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
@@ -134,13 +134,18 @@ class Navigation extends React.Component {
               <div className="collapse" id="authPages">
                 <ul className="nav sub-menu">
                   <li className="nav-item">
-                    <a href="pages/auth/login.html" className="nav-link">
-                      Login
+                    <a href="admin/edit-user" className="nav-link">
+                      edit user
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a href="pages/auth/register.html" className="nav-link">
-                      Register
+                    <a href="admin/delete-user" className="nav-link">
+                      delete user
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a href="admin/create-user" className="nav-link">
+                      create user
                     </a>
                   </li>
                 </ul>

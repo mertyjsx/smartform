@@ -1,6 +1,6 @@
 import React from "react";
 // import { getToken, logout } from "../_services/user.service";
-
+import {Link} from "react-router-dom"
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -135,15 +135,20 @@ class Sidebar extends React.Component {
               </a>
               <div className="collapse" id="authPages">
                 <ul className="nav sub-menu">
-                  <li className="nav-item">
-                    <a href="pages/auth/login.html" className="nav-link">
-                      Login
-                    </a>
+                <li className="nav-item">
+                    <Link to="/admin/edit-user" className="nav-link">
+                      edit user
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="" className="nav-link">
-                      Register
-                    </a>
+                    <Link to="/admin/delete-user" className="nav-link">
+                      delete user
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/admin/create-user" className="nav-link">
+                      create user
+                    </Link>
                   </li>
                 </ul>
               </div>

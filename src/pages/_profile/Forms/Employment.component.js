@@ -118,11 +118,11 @@ const  deleteSkill = () => {
 
           employments.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
             <Grid item>
-              <h6> universty name : {item.employer_name}</h6>
+              <h6>  {item.employer_name}</h6>
             </Grid>
 
             <Grid item>
-              <h6>    college : {item.job_title}  </h6>
+              <h6>     {item.job_title}  </h6>
             </Grid>
             <Grid item>
               <Button onClick={() => deleteEmployment(item)} variant="contained" color="secondary"> delete </Button>

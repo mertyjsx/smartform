@@ -1,7 +1,7 @@
 import React from "react";
 import MultipleSelect from 'react-select';
 import Navigation from "../../pages/_components/Navigation.page";
-import {createUser } from "../_services/user.service";
+import {deleteUser } from "../_services/user.service";
 
 // Encrypt
 
@@ -12,11 +12,7 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      email: "",
-      password: "",
-      rePassword: "",
-      role:"",
-      error: "",
+     id:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +31,7 @@ class SignUp extends React.Component {
     //Then cipher any text:
   
 
-    createUser(this.state).then(
+    deleteUser(this.state.id).then(
       (response) => {
       console.log(response)
 
@@ -61,7 +57,7 @@ class SignUp extends React.Component {
         <div className="site_content">
           <div className="heading-banner text-center">
             <div className="container">
-              <h1>Create new user!</h1>
+              <h1>Delete user!</h1>
             </div>
           </div>
           <div className="login-form">
@@ -70,45 +66,16 @@ class SignUp extends React.Component {
                 <form method="post" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <input
-                      type="email"
-                      name="email"
-                      placeholder=" Email"
+                      type="text"
+                      name="id"
+                      placeholder="user id"
                       className="form-control"
                       onChange={this.handleChange}
                       required
                       autoFocus
                     />
                   </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className="form-control"
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      name="rePassword"
-                      placeholder="Verify password"
-                      className="form-control"
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                  <MultipleSelect
-
-styles={{borderLeft:1}}
-
-onChange={(e) => this.setState({role:e.value})}
-options={[{ value: 'user', label: 'user' },
-        { value: 'admin', label: 'admin' }]}
-/>
-                  </div>
+              
                   <button className="btn btn-purpal w-100" disabled={loading}>
                     {loading ? "Creating..." : "Create user"}
                   </button>

@@ -14,6 +14,8 @@ import HomePage from "./pages/Home.page";
 
 import ProfilePage from "./pages/Profile.page";
 import CreateUserPage from "./Admin/createUserpage"
+import DeleteUserPage from "./Admin/deleteUserpage"
+import EditUserPage from "./Admin/editUserpage"
 // PUBLIC & PRIVATE ROUTES HANDLING
 import AdminPrivateRoute from "./Route/AdminPrivateRoute";
 import AdminPublicRoute from "./Route/AdminPublicRoute";
@@ -23,6 +25,7 @@ import PublicRoute from "./Route/PublicRoute";
 // ADMIN PANEL PAGES 
 import AdminDashboard from "./Admin/Dashboard.page";
 import AdminLogin from "./Admin/Login.page";
+import { deleteUser } from "./Admin/_services/user.service";
 
 
 function App() {
@@ -41,6 +44,8 @@ function App() {
       <AdminPublicRoute exact path="/admin/login" component={AdminLogin} />
       <AdminPrivateRoute exact path="/admin/dashboard" component={AdminDashboard} />
       <AdminPrivateRoute exact path="/admin/create-user" component={CreateUserPage} />
+      <AdminPrivateRoute exact path="/admin/edit-user" component={EditUserPage} />
+      <AdminPrivateRoute exact path="/admin/delete-user" component={DeleteUserPage} />
       <PrivateRoute exact path="/profile" component={ProfilePage} />
 
       <Route path="*" component={() => "404 Not Found!"} />

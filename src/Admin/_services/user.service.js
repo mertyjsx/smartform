@@ -76,7 +76,7 @@ export const createUser = async ({email, password,rePassword,role}) => {
   let dataArray = {
     email: email,
     password: password,
-    re_passwrod:rePassword,
+    re_password:rePassword,
     role:role
 
   };
@@ -98,6 +98,75 @@ export const createUser = async ({email, password,rePassword,role}) => {
        
 
         alert(`${userDetails.email} has been created` );
+      }
+      return responseData;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+
+
+export const editUser = async ({email, password,id,status}) => {
+  const apiUrl = global.config.apiBaseURL.url;
+  let dataArray = {
+    email: email,
+    password: password,
+    id:id,
+    status:status
+
+  };
+  const formBody = handleFormRequest(dataArray);
+
+  return await fetch(apiUrl + "auth/admin_edit_user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: formBody,
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+      if (!responseData.success) {
+        alert(responseData.msg);
+      } else {
+        let userDetails = responseData.data;
+       
+
+        alert(`${userDetails.email} has been edited` );
+      }
+      return responseData;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
+
+
+export const deleteUser = async (id) => {
+  const apiUrl = global.config.apiBaseURL.url;
+  let dataArray = {
+   id:id
+
+  };
+  const formBody = handleFormRequest(dataArray);
+
+  return await fetch(apiUrl + "auth/admin_delete_user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: formBody,
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+      if (!responseData.success) {
+        alert(responseData.msg);
+      } else {
+        let userDetails = responseData.data;
+       
+
+        alert(`user who has ${id} deleted` );
       }
       return responseData;
     })

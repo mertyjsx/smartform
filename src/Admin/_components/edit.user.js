@@ -1,7 +1,7 @@
 import React from "react";
 import MultipleSelect from 'react-select';
 import Navigation from "../../pages/_components/Navigation.page";
-import {createUser } from "../_services/user.service";
+import {editUser } from "../_services/user.service";
 
 // Encrypt
 
@@ -14,8 +14,8 @@ class SignUp extends React.Component {
       loading: false,
       email: "",
       password: "",
-      rePassword: "",
-      role:"",
+      id: "",
+      status:"",
       error: "",
     };
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +35,7 @@ class SignUp extends React.Component {
     //Then cipher any text:
   
 
-    createUser(this.state).then(
+    editUser(this.state).then(
       (response) => {
       console.log(response)
 
@@ -61,7 +61,7 @@ class SignUp extends React.Component {
         <div className="site_content">
           <div className="heading-banner text-center">
             <div className="container">
-              <h1>Create new user!</h1>
+              <h1>Edit user!</h1>
             </div>
           </div>
           <div className="login-form">
@@ -69,10 +69,23 @@ class SignUp extends React.Component {
               <div className="login-form-box">
                 <form method="post" onSubmit={this.handleSubmit}>
                   <div className="form-group">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      name="id"
+                      placeholder="id"
+                      className="form-control"
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
+                  
+                  
+                  
                     <input
                       type="email"
                       name="email"
-                      placeholder=" Email"
+                      placeholder="new Email"
                       className="form-control"
                       onChange={this.handleChange}
                       required
@@ -83,7 +96,7 @@ class SignUp extends React.Component {
                     <input
                       type="password"
                       name="password"
-                      placeholder="Password"
+                      placeholder=" new Password"
                       className="form-control"
                       onChange={this.handleChange}
                       required
@@ -91,24 +104,15 @@ class SignUp extends React.Component {
                   </div>
                   <div className="form-group">
                     <input
-                      type="password"
-                      name="rePassword"
-                      placeholder="Verify password"
+                      type="text"
+                      name="new status"
+                      placeholder="status"
                       className="form-control"
                       onChange={this.handleChange}
                       required
                     />
                   </div>
-                  <div className="form-group">
-                  <MultipleSelect
-
-styles={{borderLeft:1}}
-
-onChange={(e) => this.setState({role:e.value})}
-options={[{ value: 'user', label: 'user' },
-        { value: 'admin', label: 'admin' }]}
-/>
-                  </div>
+                
                   <button className="btn btn-purpal w-100" disabled={loading}>
                     {loading ? "Creating..." : "Create user"}
                   </button>
