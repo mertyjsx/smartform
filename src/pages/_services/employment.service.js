@@ -4,7 +4,7 @@ import { getToken } from "./user.service";
 export const EmploymentData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
-    employment:fieldsState.employment,
+    employment:JSON.stringify(fieldsState.employment),
     pri: fieldsState.private,
     resume: fieldsState.resume,
     pub: fieldsState.public,
