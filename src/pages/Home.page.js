@@ -16,6 +16,16 @@ class HomePage extends React.Component {
     };
   }
 
+
+   compare= ( a, b )=> {
+    if ( a.id < b.id ){
+      return -1;
+    }
+    if ( a.id > b.id ){
+      return 1;
+    }
+    return 0;
+  }
   // USING BELOW METHOD TO CALL BEFORE RENDER HTML CODE ON WEB
   componentDidMount() {
     $(window).scroll(function () {
@@ -26,7 +36,15 @@ class HomePage extends React.Component {
       else body.removeClass("fixed");
     });
     const apiUrl = global.config.apiBaseURL.url;
-axios.get( apiUrl+"user/show_static_content?page=Homepage").then(response=>this.setState({content:response.data.data}))
+axios.get( apiUrl+"user/show_static_content?page=Homepage").then(response=>{
+if(response.data.data){
+  console.log(response.data.data)
+  this.setState({content:response.data.data.sort(this.compare)})
+}
+ 
+
+
+})
 
 
   }

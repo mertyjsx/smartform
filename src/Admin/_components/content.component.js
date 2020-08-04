@@ -4,26 +4,50 @@ import axios from "axios"
 import {getToken} from "../_services/user.service"
 export default function Contentcomponent({isContent,url,id}) {
 const [title,set_title]=useState("")
-const [content,set_content]=useState("")
+const [content,set_content]=useState(isContent?"":"empty")
    const [loading,set_loading]=useState(false)
 
+   function handleFormRequest(dataArray) {
+    var formBody = [];
+    for (var property in dataArray) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(dataArray[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+    return formBody;
+  }
+  
 
-const handleSubmit=()=>{
+
+
+
+const handleSubmit=(e)=>{
+  e.preventDefault();
     const apiUrl = global.config.apiBaseURL.url;
+    console.log(apiUrl)
     set_loading(true)
-
-  fetch(apiUrl + "user/edit_static_content", {
+    let body=handleFormRequest({id:id,page:"Homepage",title:title,content:content})
+   fetch(apiUrl + "user/edit_static_content", {
         method: "POST",
         headers: {
           "Authorization": "Bearer "+getToken(),
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: {id:id,page:"Homepage",title:title,content:content},
-      }).then(
-    response=>{
-
-        console.log(response) 
+        body: body,
+      })
+      .then((response) => response.json())
+      .then(
+    responseData=>{
+      if (!responseData.success) {
+        alert(responseData.msg);
         set_loading(false)
+      } else {
+        let userDetails = responseData.data;
+        set_loading(false)
+
+        alert(responseData.msg );
+      }
     }
 
 ).catch(e=>{
@@ -42,7 +66,7 @@ const handleSubmit=()=>{
 <img src={url} className="imageEx"></img>
        </Grid>
        <Grid  xs={6} className="paddingtop-30" >
-   <form method="post" onSubmit={handleSubmit} >
+   <form  onSubmit={handleSubmit}>
                   <div className="form-group" >
                     <input
                       type="text"
@@ -68,7 +92,7 @@ const handleSubmit=()=>{
                  
                
                   </div>  }
-                  <button className="btn btn-purpal w-100" disabled={loading}>
+                  <button type="submit"  className="btn btn-purpal w-100" disabled={loading}>
                     {loading ? "Changing..." : "Change content"}
                   </button>
                   
