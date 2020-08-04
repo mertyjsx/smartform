@@ -11,7 +11,7 @@ import ForgotPassword from "./pages/ForgotPassword.page";
 import Verify from "./pages/Verify.page";
 import Contentpage from "./Admin/editContentpage"
 import HomePage from "./pages/Home.page";
-
+import ResumePage from "./pages/Resume.page"
 import ProfilePage from "./pages/Profile.page";
 import CreateUserPage from "./Admin/createUserpage"
 import DeleteUserPage from "./Admin/deleteUserpage"
@@ -48,6 +48,7 @@ function App() {
       <AdminPrivateRoute exact path="/admin/edit-content" component={Contentpage} />
       <AdminPrivateRoute exact path="/admin/delete-user" component={DeleteUserPage} />
       <PrivateRoute exact path="/profile" component={ProfilePage} />
+      <PrivateRoute exact path="/resume" component={ResumePage} />
 
       <Route path="*" component={() => "404 Not Found!"} />
     </Switch>
