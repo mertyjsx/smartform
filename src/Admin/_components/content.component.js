@@ -24,6 +24,7 @@ const [content,set_content]=useState(isContent?"":"empty")
 
 const handleSubmit=(e)=>{
   e.preventDefault();
+  if(title&&content){
     const apiUrl = global.config.apiBaseURL.url;
     console.log(apiUrl)
     set_loading(true)
@@ -55,7 +56,9 @@ const handleSubmit=(e)=>{
     console.log(e)
     set_loading(false)
 })
-   
+}else{
+  alert("Title or content cannot be empty !!")
+}
 }
 
     return (
@@ -66,7 +69,7 @@ const handleSubmit=(e)=>{
 <img src={url} className="imageEx"></img>
        </Grid>
        <Grid  xs={6} className="paddingtop-30" >
-   <form  onSubmit={handleSubmit}>
+   <div >
                   <div className="form-group" >
                     <input
                       type="text"
@@ -92,11 +95,11 @@ const handleSubmit=(e)=>{
                  
                
                   </div>  }
-                  <button type="submit"  className="btn btn-purpal w-100" disabled={loading}>
+                  <button onClick={handleSubmit}  className="btn btn-purpal w-100" disabled={loading}>
                     {loading ? "Changing..." : "Change content"}
                   </button>
                   
-                </form>
+                </div>
 
 
        </Grid>

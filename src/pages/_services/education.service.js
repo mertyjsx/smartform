@@ -1,5 +1,32 @@
 import { getToken } from "./user.service";
 import axios from "axios"
+
+
+
+
+export const getEducation=()=>{
+  const apiUrl = global.config.apiBaseURL.url;
+
+ return axios.get(apiUrl + "user/show_details?form_name=education", {
+    headers:  {
+      "Authorization": "Bearer "+getToken(),
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 // USING METHOD TO SUBMIT USER PERSONAL DATA
 export const profileEducationData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
@@ -11,9 +38,9 @@ export const profileEducationData = async (fieldsState) => {
    dt_from: fieldsState.high_school_from,
    dt_to: fieldsState.high_school_to,
    university:JSON.stringify(fieldsState.universty),
-   pri: fieldsState.private,
-    resume: fieldsState.resume,
-    pub: fieldsState.public,
+   pri:JSON.stringify(fieldsState.private),
+    resume:JSON.stringify( fieldsState.resume),
+    pub: JSON.stringify(fieldsState.public),
 
   };
 

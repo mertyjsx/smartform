@@ -1,5 +1,5 @@
 import React from "react";
-import { profileEducationData } from "../../_services/education.service";
+import { profileEducationData, getEducation } from "../../_services/education.service";
 import { Grid } from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,6 +14,7 @@ import Chip from '@material-ui/core/Chip';
 import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
 import Univertsy from "./Univertsy.component"
+import Axios from "axios";
 
 const options = [
   { value: 'public', label: 'Public' },
@@ -65,12 +66,28 @@ class ProfilePersonalPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    getEducation().then(r => console.log(r)).catch(e => console.log(e))
+
+  }
+
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
 
+  handleEdit = (obj) => {
+    let uni_Array = this.state.universty
+    console.log(obj)
+    let index = uni_Array.findIndex(item => item.uni_id === obj.uni_id)
+    uni_Array[index] = obj
 
+
+    console.log(uni_Array)
+    this.setState({ universty: uni_Array })
+
+
+  }
   handleCheckbox = (name, e) => {
     let array = e ? e : []
 
@@ -179,7 +196,7 @@ class ProfilePersonalPage extends React.Component {
 
 
   delete = (school) => {
-    let school_array = this.state.universty.filter(item => item !== school)
+    let school_array = this.state.universty.filter(item => item.uni_id !== school)
 
 
     this.setState({ universty: school_array })
@@ -299,13 +316,13 @@ class ProfilePersonalPage extends React.Component {
 
                         <FormControl autoComplete="off" className="fullw">
 
-                          <TextField  InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_from" label="From" variant="outlined" required />
+                          <TextField InputLabelProps={{ shrink: true }} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_from" label="From" variant="outlined" required />
                         </FormControl>
                       </Grid>
                       <Grid item xs={5}  >
                         <FormControl autoComplete="off" className="fullw">
 
-                          <TextField InputLabelProps={{ shrink: true}} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_to" label="To" variant="outlined" required />
+                          <TextField InputLabelProps={{ shrink: true }} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_to" label="To" variant="outlined" required />
                         </FormControl>
                       </Grid>
                     </Grid>
@@ -332,8 +349,10 @@ class ProfilePersonalPage extends React.Component {
             }
             <h5 className="m-30">Universty</h5>
             <Univertsy
-
-              handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray}></Univertsy>
+              pub={this.state.public}
+              pri={this.state.private}
+              resume={this.state.resume}
+              handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray} changeIt={this.handleEdit}></Univertsy>
           </Grid>
           <div className="form-input-flex d-flex center">
             <div className="left-input-se">
@@ -341,7 +360,7 @@ class ProfilePersonalPage extends React.Component {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: "25%" }}
+                  style={{ width: "35%" }}
                   aria-valuenow="25"
                   aria-valuemin="3"
                   aria-valuemax="100"

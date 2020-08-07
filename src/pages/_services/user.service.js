@@ -38,7 +38,7 @@ export const login = async (username, password) => {
     .then((response) => response.json())
     .then((responseData) => {
       if (!responseData.success) {
-        alert(responseData.msg);
+      
       } else {
         let userDetails = responseData.data;
         let userToken = responseData.accessToken;
@@ -151,3 +151,5 @@ function handleFormRequest(dataArray) {
   formBody = formBody.join("&");
   return formBody;
 }
+
+

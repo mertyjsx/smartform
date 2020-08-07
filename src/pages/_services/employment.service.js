@@ -5,9 +5,9 @@ export const EmploymentData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
     employment:JSON.stringify(fieldsState.employment),
-    pri: fieldsState.private,
-    resume: fieldsState.resume,
-    pub: fieldsState.public,
+    pri:JSON.stringify(fieldsState.private),
+    resume:JSON.stringify( fieldsState.resume),
+    pub: JSON.stringify(fieldsState.public),
   };
 
  

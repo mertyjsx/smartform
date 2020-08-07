@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Multi from "../../_components/MultipleSelect"
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
+import Old from "./Old.skill"
 import Chip from '@material-ui/core/Chip';
 import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
@@ -68,6 +69,7 @@ class ProfilePersonalPage extends React.Component {
             skill_desc:this.state.skill_desc,
             level:this.state.level,
             experience_year:this.state.experience_year,
+            id:Math.floor(Math.random() * Math.floor(21000))
         }
     )
     this.setState({skills: s_array,enabled:false })
@@ -76,14 +78,26 @@ class ProfilePersonalPage extends React.Component {
   
   
   
-  delete = (s) => {
-    let s_array = this.state.skills.filter(item => item !==s)
+  delete = (c) => {
+    console.log(c)
+    let c_array = this.state.skill.filter(item => item.id !==c.id)
   
   
-    this.setState({ skills: s_array })
+    this.setState({ skill: c_array })
   
   }
-
+  handleEdit=(obj)=>{
+    let uni_Array=this.state.skill
+    console.log(obj)
+    let index =uni_Array.findIndex(item=>item.id===obj.id)
+  uni_Array[index]=obj
+  
+  
+  console.log(uni_Array)
+  this.setState({skill:uni_Array})
+  
+  
+  }
 
 
 
@@ -235,22 +249,16 @@ class ProfilePersonalPage extends React.Component {
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
 
-        <div>
+        
+        {
 
-{
+this.state.skills&&this.state.skills.map(item => <Old pri={this.state.private} pub={this.state.public} resume={this.state.resume} old={item} editIt={this.handleEdit} enabled_props={this.state.enabled}  handleCheckbox={this.handleCheckbox} deleteIt={this.delete}
 
-  this.state.skills.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-    <Grid item>
-      <h6> skill: {item.skill}</h6>
-    </Grid>
 
-    
-    <Grid item>
-      <Button onClick={() => this.delete(item)} variant="contained" color="secondary"> delete </Button>
-    </Grid>
-  </Grid>)
+
+
+></Old>)
 }
-</div>
           
       {this.state.enabled&&
       
@@ -341,14 +349,14 @@ class ProfilePersonalPage extends React.Component {
       
       
       }
-                    {this.state.enabled?<Button onClick={this.addSToArray} className="mb20 bgc ml-25 " variant="contained"   >add skill</Button>:this.state.skills.length<10&&<div onClick={()=>this.setState({enabled:false})} className="add-tag">new skills</div>}
+                    {this.state.enabled?<Button onClick={this.addSToArray} className="mb20 bgc ml-25 " variant="contained"   >add skill</Button>:this.state.skills.length<10&&<div onClick={()=>this.setState({enabled:true})} className="add-tag">new skills</div>}
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se">
                       <div className="progress">
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: "25%" }}
+                          style={{ width: "75%" }}
                           aria-valuenow="25"
                           aria-valuemin="3"
                           aria-valuemax="100"

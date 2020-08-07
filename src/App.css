@@ -28,6 +28,27 @@ margin-bottom: 55px !important;
   width: 200px;
  
 }
+.edit-buttons{
+
+position: absolute;
+top: 10px;
+right: 10px;
+display: flex;
+flex-direction: row;
+}
+.oldContainer{
+  position: relative;
+  background-color: #F8F8F8;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+svg:hover{
+  cursor: pointer;
+}
+.delete{
+  padding-top:20px;
+}
+
 .margintop-90{
   margin-top: 90px;
 }

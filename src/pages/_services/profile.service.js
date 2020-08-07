@@ -7,9 +7,9 @@ export const personalProfileData = async (fieldsState) => {
     first_name: fieldsState.first_name,
     middle_name: fieldsState.middle_name,
     last_name: fieldsState.last_name,
-    pri: fieldsState.private,
-    resume: fieldsState.resume,
-    pub: fieldsState.public,
+    pri:JSON.stringify(fieldsState.private),
+    resume:JSON.stringify( fieldsState.resume),
+    pub: JSON.stringify(fieldsState.public),
 
     address: fieldsState.address,
     zip_code: fieldsState.zip_code,

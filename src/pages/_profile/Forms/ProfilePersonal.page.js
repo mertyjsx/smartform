@@ -13,6 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
+import Icon from "../../../assets/icons/delete"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const options = [
   { value: 'public', label: 'Public' },
@@ -217,7 +218,7 @@ class ProfilePersonalPage extends React.Component {
           
           
           
-          
+
           
           <Grid container direction="column" className="m-20">
             <h5 className="m-30">Name </h5>           
@@ -436,7 +437,7 @@ class ProfilePersonalPage extends React.Component {
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: "25%" }}
+                          style={{ width: "15%" }}
                           aria-valuenow="25"
                           aria-valuemin="3"
                           aria-valuemax="100"

@@ -70,10 +70,21 @@ addEmploymentToArray = (employment) => {
 
 }
 
+handleEdit=(obj)=>{
+  let uni_Array=this.state.employment
+  console.log(obj)
+  let index =uni_Array.findIndex(item=>item.id===obj.id)
+uni_Array[index]=obj
 
 
-delete = (employment) => {
-  let employment_Array = this.state.employment.filter(item => item !==employment)
+console.log(uni_Array)
+this.setState({employment:uni_Array})
+
+
+}
+
+delete = (id) => {
+  let employment_Array = this.state.employment.filter(item => item.id !==id)
 
 
   this.setState({ employment: employment_Array })
@@ -247,7 +258,7 @@ justSkip=()=>{
           
         {this.state.enable==="yes"&&
         (
-<Employment handleCheckbox={this.handleCheckbox} add={this.addEmploymentToArray} deleteEmployment={this.delete} employments={this.state.employment}></Employment>
+<Employment handleCheckbox={this.handleCheckbox} pub={this.state.public} pri={this.state.private} resume={this.state.resume} add={this.addEmploymentToArray} editIt={this.handleEdit} deleteEmployment={this.delete} employments={this.state.employment}></Employment>
 
         )
         
@@ -260,7 +271,7 @@ justSkip=()=>{
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: "25%" }}
+                          style={{ width: "55%" }}
                           aria-valuenow="25"
                           aria-valuemin="3"
                           aria-valuemax="100"

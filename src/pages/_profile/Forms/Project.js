@@ -12,6 +12,8 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import MultipleSelect from 'react-select';
+import OldComponent from "./Old.component.inner.js/oldComponent"
+import Old from "./Old.project"
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const options = [
@@ -62,11 +64,12 @@ class ProfilePersonalPage extends React.Component {
 
 
  addSkill = (e) => {
+   console.log(this.state.skill_gained)
     e.preventDefault();
-this.setState({enabled_skill:false})
+
 let skill_Array=this.state.skill_gained
 skill_Array.push(this.state.skill)
-   this.setState({skill_gained:skill_Array})
+   this.setState({skill_gained:skill_Array,enabled_skill:false})
 
   }
 
@@ -81,9 +84,10 @@ skill_Array.push(this.state.skill)
       dt_from:this.state.dt_to,
       dt_to:this.state.dt_to,
       skill_gained:this.state.skill_gained,
+      id:Math.floor(Math.random() * Math.floor(21000))
         }
     )
-    this.setState({project: s_array,enabled:false ,skill_gained:[]})
+    this.setState({project: s_array,enabled:false })
   
   }
   
@@ -110,6 +114,28 @@ skill_Array.push(this.state.skill)
 
   }
 
+
+
+   editGained=(obj)=>{
+    let Array=this.state.skill_gained
+  
+
+   let index =Array.findIndex(item=>item===obj)
+ Array[index]=obj
+
+this.setState({skill_gained:Array})
+ 
+  
+
+}
+  deleteGained = (skill) => {
+    let skill_array = this.state.skill_gained.filter(item => item !== skill)
+
+
+this.setState({skill_gained:skill_array})
+
+  }
+  
 
   handleCheckbox = (name, e) => {
     let array = e ? e : []
@@ -229,6 +255,27 @@ skill_Array.push(this.state.skill)
     console.log("Resume -- ", name, " == ", value);
     // this.setState({ [name]: value });
   }
+  handleEdit=(obj)=>{
+    let uni_Array=this.state.project
+    console.log(obj)
+    let index =uni_Array.findIndex(item=>item.id===obj.id)
+  uni_Array[index]=obj
+  
+  
+  console.log(uni_Array)
+  this.setState({project:uni_Array})
+  
+  
+  }
+  
+  delete = (c) => {
+    console.log(c)
+    let c_array = this.state.project.filter(item => item.id !==c.id)
+  
+  
+    this.setState({ project: c_array })
+  
+  }
 
   // USING METHOD TO SUMBIT FORM DETAILS TO SERVER
   handleSubmit(e) {
@@ -248,26 +295,21 @@ skill_Array.push(this.state.skill)
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state.skill_gained)
     const { loading, error } = this.state;
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
 
+      
         <div>
 
 {
 
-  this.state.project.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-    <Grid item>
-      <h6> project name: {item.project_name}</h6>
-    </Grid>
+  this.state.project&&this.state.project.map(item => <Old pri={this.state.private} 
+    pub={this.state.public} resume={this.state.resume} old={item} editIt={this.handleEdit} enabled_props={this.state.enabled}  handleCheckbox={this.handleCheckbox} deleteIt={this.delete}
 
-    
-    <Grid item>
-      <Button onClick={() => this.delete(item)} variant="contained" color="secondary"> delete </Button>
-    </Grid>
-  </Grid>)
+    ></Old>)
 }
 </div>
           
@@ -350,23 +392,9 @@ skill_Array.push(this.state.skill)
 
     <Paper elevation={3} className="paper-container margintop30">
     <h5 className="m-30 color p-12">Skill gained</h5>
+    {this.state.skill_gained&&this.state.skill_gained.map(item=><OldComponent old={item} del={this.deleteGained} edit={this.editGained} name="skill_gained" label="Skill gained" handleCheckbox={this.handleCheckbox} pub={this.state.public} pri={this.state.private} resume={this.state.resume}></OldComponent>)}
       <Grid container>
-        <div>
-
-          {
-
-            this.state.skill_gained.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-              <Grid item>
-                <h6> {item}</h6>
-              </Grid>
-
-             
-              <Grid item>
-                <Button onClick={() => this.deleteSkill(item)} variant="contained" color="secondary"> delete </Button>
-              </Grid>
-            </Grid>)
-          }
-        </div>
+       
        {this.state.enabled_skill&&
        
        <Grid container direction={"row"} xs={12} className={`mt-30 `}>
@@ -416,7 +444,7 @@ skill_Array.push(this.state.skill)
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: "25%" }}
+                          style={{ width: "85%" }}
                           aria-valuenow="25"
                           aria-valuemin="3"
                           aria-valuemax="100"

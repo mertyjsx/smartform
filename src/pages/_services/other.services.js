@@ -5,9 +5,9 @@ export const certificateData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
     certification:JSON.stringify(fieldsState.Certification),
-   pri: fieldsState.private,
-    resume: fieldsState.resume,
-    pub: fieldsState.public,
+    pri:JSON.stringify(fieldsState.private),
+    resume:JSON.stringify( fieldsState.resume),
+    pub: JSON.stringify(fieldsState.public),
 
   };
 
@@ -41,9 +41,9 @@ export const interestData = async (fieldsState) => {
     const apiUrl = global.config.apiBaseURL.url;
     let dataArray = {
         Interest:JSON.stringify(fieldsState.Interest),
-     pri: fieldsState.private,
-      resume: fieldsState.resume,
-      pub: fieldsState.public,
+        pri:JSON.stringify(fieldsState.private),
+        resume:JSON.stringify( fieldsState.resume),
+        pub: JSON.stringify(fieldsState.public),
   
     };
   
@@ -76,9 +76,9 @@ export const interestData = async (fieldsState) => {
     const apiUrl = global.config.apiBaseURL.url;
     let dataArray = {
       skills:JSON.stringify(fieldsState.skills),
-     pri: fieldsState.private,
-      resume: fieldsState.resume,
-      pub: fieldsState.public,
+      pri:JSON.stringify(fieldsState.private),
+      resume:JSON.stringify( fieldsState.resume),
+      pub: JSON.stringify(fieldsState.public),
   
     };
   
@@ -111,9 +111,9 @@ export const interestData = async (fieldsState) => {
     const apiUrl = global.config.apiBaseURL.url;
     let dataArray = {
       project:JSON.stringify(fieldsState.project),
-     pri: fieldsState.private,
-      resume: fieldsState.resume,
-      pub: fieldsState.public,
+      pri:JSON.stringify(fieldsState.private),
+      resume:JSON.stringify( fieldsState.resume),
+      pub: JSON.stringify(fieldsState.public),
   
     };
   

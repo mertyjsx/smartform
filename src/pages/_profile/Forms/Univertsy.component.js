@@ -3,6 +3,9 @@ import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
 import { Grid, Button, FormGroup, Paper ,} from "@material-ui/core"
 import {Alert } from "@material-ui/lab"
+import OldUniversty from "./Old.Universty.form"
+import OldComponent from "./Old.component.inner.js/oldComponent"
+
 import FormControl from '@material-ui/core/FormControl';
 const options2 = [
   { value: ' graduated', label: ' graduated' },
@@ -17,8 +20,13 @@ const options = [
   { value: 'resume', label: 'Resume' },
 ];
 
+
+
+
+
+
 export default function Univertsycomponent({ handleCheckbox, 
-                       add, schools, deleteSchool,}) {
+                       add, schools, deleteSchool,changeIt,resume,pri,pub}) {
   const [universty, set_universty] = useState({})
   const [fields, set_fields] = useState([])
   const [honors, set_honors] = useState([])
@@ -50,6 +58,52 @@ export default function Univertsycomponent({ handleCheckbox,
   const handleCourse = (e) => {
     set_course(e.target.value)
   }
+
+  
+const editField=(obj)=>{
+  let Array=fields
+ 
+  let index =Array.findIndex(item=>item===obj)
+Array[index]=obj
+
+set_fields(Array)
+
+
+}
+
+
+const editCourse=(obj)=>{
+  let Array=courses
+ 
+  let index =Array.findIndex(item=>item===obj)
+Array[index]=obj
+
+set_courses(Array)
+
+
+}
+const editHonor=(obj)=>{
+  let Array=honors
+ 
+  let index =Array.findIndex(item=>item===obj)
+Array[index]=obj
+
+set_honors(Array)
+
+
+}
+const editAward=(obj)=>{
+  let Array=awards
+ 
+  let index =Array.findIndex(item=>item===obj)
+Array[index]=obj
+
+set_awards(Array)
+
+
+}
+
+
   const addSchool = (e) => {
     e.preventDefault();
 let error=false
@@ -74,11 +128,12 @@ if(!universty.u_to){
     if(!error){
       let universty_object={
         ...universty,
-        uni_id:schools.length+1,
+        uni_id:Math.floor(Math.random() * Math.floor(21000)),
         field_of_study:fields,
         honors: honors,
         coursework: courses,
         award: awards,
+       
       }
           add(universty_object)
           set_universty({})
@@ -94,38 +149,38 @@ if(!universty.u_to){
   }
   const addField = (e) => {
     e.preventDefault();
-set_enabled_field(false)
-let field_array=fields
-field_array.push(field)
+  
+  let field_array=fields
+  field_array.push(field)
     set_fields(field_array)
-
+    set_enabled_field(false)
+  
   }
   const addcourse = (e) => {
     e.preventDefault();
-let course_array=courses
-course_array.push(course)
+  let course_array=courses
+  course_array.push(course)
     set_courses(course_array)
     set_enabled_course(false)
-
+  
   }
   const addaward = (e) => {
     e.preventDefault();
-set_enabled_award(false)
-let award_array=awards
-award_array.push(award)
+  
+  let award_array=awards
+  award_array.push(award)
     set_awards(award_array)
-
+    set_enabled_award(false)
   }
   const addhonor = (e) => {
     e.preventDefault();
     let honor_array=honors
     honor_array.push(honor)
         set_honors(honor_array)
-    set_enabled_honor(false)
+        set_enabled_honor(false)
   }
-
-
- const deleteCourse = () => {
+  
+  const deleteCourse = (course) => {
     let course_array = courses.filter(item => item !== course)
 
 
@@ -133,22 +188,22 @@ award_array.push(award)
 
   }
 
-const  deleteAward = () => {
-    let award_array = awards.filter(item => item !== award)
+const  deleteAward = (award) => {
+    let award_array = awards.filter(item=> item !== award)
 
 
  set_awards(award_array)
 
   }
 
- const deleteField = () => {
+ const deleteField = (field) => {
 
     let field_array = fields.filter(item => item !== field)
 
 set_fields(field_array)
 
   }
- const deleteHonor = () => {
+ const deleteHonor = (honor) => {
    
     let honor_array = honors.filter(item => item !== honor)
 
@@ -156,6 +211,9 @@ set_honors(honor_array)
 
   }
 
+
+
+console.log(enabled)
   return (
     <div elevation={3}   className="paper-container">
      
@@ -163,18 +221,12 @@ set_honors(honor_array)
 
         {
 
-          schools.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-            <Grid item>
-              <h6> universty name : {item.university}</h6>
-            </Grid>
-
-            <Grid item>
-              <h6>    college : {item.college}  </h6>
-            </Grid>
-            <Grid item>
-              <Button onClick={() => deleteSchool(item)} variant="contained" color="secondary"> delete </Button>
-            </Grid>
-          </Grid>)
+          schools&&schools.map(item => <OldUniversty enabled_props={enabled} pri={pri} pub={pub} resume={resume} old={item} changeIt={changeIt}  handleCheckbox={handleCheckbox} deleteSchool={deleteSchool}
+          
+          
+          
+          
+          ></OldUniversty>)
         }
       </div>
 
@@ -295,24 +347,9 @@ set_honors(honor_array)
   </Grid>
 </Grid>
 <Paper elevation={3} className="paper-container">
-<h5 className="m-30 color p-12">Study of field</h5>
-  <Grid container>
-    <div>
+<h5 className="m-30 color p-12">Field of study</h5>
 
-      {
-
-        fields.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-          <Grid item>
-            <h6> {item}</h6>
-          </Grid>
-
-         
-          <Grid item>
-            <Button onClick={() => deleteField(item)} variant="contained" color="secondary"> delete </Button>
-          </Grid>
-        </Grid>)
-      }
-    </div>
+{fields&&fields.map(item=><OldComponent isFreeze={enabled} old={item} del={deleteField} edit={editField} name="field_of_study" label="field of study" handleCheckbox={handleCheckbox} pub={pub} pri={pri} resume={resume}></OldComponent>)}
   {enabled_field&&
     <Grid container direction={"row"} xs={12} className={`mt-30`}>
     <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
@@ -344,7 +381,6 @@ set_honors(honor_array)
     {enabled_field?<Button onClick={addField} className="mb20 bgc ml-25 " variant="contained"   >add</Button>:fields.length<3&&<div onClick={()=>set_enabled_field(true)} className="add-tag">new study of field</div>}
 
 
-  </Grid>
 </Paper>
 
 <Grid container direction={"row"} xs={12} className="mt-30 marginTop30">
@@ -411,23 +447,9 @@ set_honors(honor_array)
 </Grid>
 <Paper elevation={3} className="paper-container">
 <h5 className="m-30 color p-12">Honors</h5>
+{honors&&honors.map(item=><OldComponent isFreeze={enabled} old={item} del={deleteHonor} edit={editHonor} name="honor" label="honor" handleCheckbox={handleCheckbox} pub={pub} pri={pri} resume={resume}></OldComponent>)}
   <Grid container>
-    <div>
-
-      {
-
-        honors.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-          <Grid item>
-            <h6> {item}</h6>
-          </Grid>
-
-         
-          <Grid item>
-            <Button onClick={() => deleteHonor(item)} variant="contained" color="secondary"> delete </Button>
-          </Grid>
-        </Grid>)
-      }
-    </div>
+    
     {enabled_honor&&
     <Grid container direction={"row"} xs={12} className={`mt-30`}>
     <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
@@ -463,23 +485,9 @@ set_honors(honor_array)
 </Paper>
 <Paper elevation={3} className="paper-container">
 <h5 className="m-30 color p-12">Courses</h5>
+{courses&&courses.map(item=><OldComponent isFreeze={enabled} old={item} del={deleteCourse} edit={editCourse} name="course" label="course" handleCheckbox={handleCheckbox} pub={pub} pri={pri} resume={resume}></OldComponent>)}
   <Grid container>
-    <div>
-
-      {
-
-        courses.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-          <Grid item>
-            <h6> {item}</h6>
-          </Grid>
-
-         
-          <Grid item>
-            <Button onClick={() => deleteCourse(item)} variant="contained" color="secondary"> delete </Button>
-          </Grid>
-        </Grid>)
-      }
-    </div>
+    
 {enabled_course&&
     <Grid container direction={"row"} xs={12} className={`mt-30 `}>
     <Grid container xs={12} md={7} className={`p-12 `} alignItems="center" alignContent="center" >
@@ -515,23 +523,9 @@ set_honors(honor_array)
 </Paper>
 <Paper elevation={3} className="paper-container">
 <h5 className="m-30 color p-12">Awards</h5>
+{awards&&awards.map(item=><OldComponent isFreeze={enabled} old={item} del={deleteAward} edit={editAward} name="award" label="award" handleCheckbox={handleCheckbox} pub={pub} pri={pri} resume={resume}></OldComponent>)}
   <Grid container>
-    <div>
-
-      {
-
-        awards.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-          <Grid item>
-            <h6> {item}</h6>
-          </Grid>
-
-         
-          <Grid item>
-            <Button onClick={() => deleteAward(item)} variant="contained" color="secondary"> delete </Button>
-          </Grid>
-        </Grid>)
-      }
-    </div>
+   
     {enabled_award&&
     
     <Grid container direction={"row"} xs={12} className={`mt-30 `}>

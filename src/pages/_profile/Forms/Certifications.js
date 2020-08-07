@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import MultipleSelect from 'react-select';
+import Old from "./Old.certification"
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const options = [
@@ -59,7 +60,7 @@ class ProfilePersonalPage extends React.Component {
 
     let c_array = this.state.Certification
   
-    c_array.push({certificate_name:this.state.certificate_name,date_issue:this.state.date_issue})
+    c_array.push({certificate_name:this.state.certificate_name,date_issue:this.state.date_issue, id:Math.floor(Math.random() * Math.floor(21000))})
     this.setState({Certification: c_array ,enabled:false})
   
   }
@@ -67,7 +68,7 @@ class ProfilePersonalPage extends React.Component {
   
   
   delete = (c) => {
-    let c_array = this.state.Certification.filter(item => item !==c)
+    let c_array = this.state.Certification.filter(item => item.id !==c.id)
   
   
     this.setState({ Certification: c_array })
@@ -218,6 +219,18 @@ class ProfilePersonalPage extends React.Component {
     );
   }
 
+  handleEdit=(obj)=>{
+    let uni_Array=this.state.Certification
+    console.log(obj)
+    let index =uni_Array.findIndex(item=>item.id===obj.id)
+  uni_Array[index]=obj
+  
+  
+  console.log(uni_Array)
+  this.setState({Certification:uni_Array})
+  
+  
+  }
   render() {
     console.log(this.state)
     const { loading, error } = this.state;
@@ -225,22 +238,19 @@ class ProfilePersonalPage extends React.Component {
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
 
-        <div>
+      
+        {
 
-{
+this.state.Certification&&this.state.Certification.map(item => <Old pri={this.state.private} pub={this.state.public} resume={this.state.resume} old={item} editIt={this.handleEdit} enabled_props={this.state.enabled}  handleCheckbox={this.handleCheckbox} deleteIt={this.delete}
 
-  this.state.Certification.map(item => <Grid container className="universty" alignItems="center" justify="space-around">
-    <Grid item>
-      <h6> name : {item.certificate_name}</h6>
-    </Grid>
 
-    
-    <Grid item>
-      <Button onClick={() => this.delete(item)} variant="contained" color="secondary"> delete </Button>
-    </Grid>
-  </Grid>)
+
+
+></Old>)
 }
-</div>
+          
+          
+      
           
       {this.state.enabled&&
         <div >
@@ -293,14 +303,14 @@ class ProfilePersonalPage extends React.Component {
       
       
       }
-                    {this.state.enabled?<Button onClick={this.addCToArray} className="mb20 bgc ml-25 " variant="contained"   >add certification</Button>:<div onClick={()=>this.setState({enabled:false})} className="add-tag">new certification</div>}
+                    {this.state.enabled?<Button onClick={this.addCToArray} className="mb20 bgc ml-25 " variant="contained"   >add certification</Button>:<div onClick={()=>this.setState({enabled:true})} className="add-tag">new certification</div>}
                   <div className="form-input-flex d-flex center">
                     <div className="left-input-se">
                       <div className="progress">
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: "25%" }}
+                          style={{ width: "65%" }}
                           aria-valuenow="25"
                           aria-valuemin="3"
                           aria-valuemax="100"
