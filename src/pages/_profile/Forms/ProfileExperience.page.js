@@ -1,6 +1,7 @@
 import React from "react";
 import { EmploymentData} from "../../_services/employment.service";
-import { Grid ,Radio,FormControlLabel,FormLabel,RadioGroup} from "@material-ui/core"
+import { Grid ,Radio,FormControlLabel,FormLabel,RadioGroup,CircularProgress} from "@material-ui/core"
+import {getPersonal, getExperience} from "../../_services/getDatas"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -58,6 +59,22 @@ class ProfilePersonalPage extends React.Component {
 
 enableChange=(e)=>{
 this.setState({enable:e.target.value})
+}
+
+componentDidMount() {
+  this.setState({ loading: true })
+  getExperience().then(r => {
+
+
+    console.log(r)
+    this.setState({ loading: false ,employment:r.data.data.Experience})
+
+  }
+
+
+  ).catch(e => console.log(e))
+
+
 }
 
 
@@ -239,6 +256,7 @@ justSkip=()=>{
   render() {
     console.log(this.state)
     const { loading, error } = this.state;
+    if(!loading)
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
@@ -313,6 +331,7 @@ justSkip=()=>{
         </form>
       </div>
     );
+    else return(<CircularProgress  className="progressloading" />)
   }
 }
 

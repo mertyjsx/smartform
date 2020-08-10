@@ -1,5 +1,6 @@
 import React from "react";
 import {projectData} from "../../_services/other.services";
+import {getProject} from "../../_services/getDatas"
 import { Grid ,Paper} from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -61,6 +62,26 @@ class ProfilePersonalPage extends React.Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
+
+
+
+  componentDidMount() {
+    this.setState({ loading: true })
+    getProject().then(r => {
+let Data=r.data.data.Project
+console.log(Data)
+      Data=Data?Data:[]
+      this.setState({...this.state, loading: false,project:Data,enabled:Data.length<1})
+
+    }
+
+
+    ).catch(e => console.log(e))
+
+
+  }
+
+
 
 
  addSkill = (e) => {
@@ -295,7 +316,7 @@ this.setState({skill_gained:skill_array})
   }
 
   render() {
-    console.log(this.state.skill_gained)
+    console.log(this.state)
     const { loading, error } = this.state;
     return (
       <div className="pro-right-in">

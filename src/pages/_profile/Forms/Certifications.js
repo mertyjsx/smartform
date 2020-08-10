@@ -1,6 +1,7 @@
 import React from "react";
 import {certificateData } from "../../_services/other.services";
-import { Grid } from "@material-ui/core"
+import {getCertification} from "../../_services/getDatas"
+import { Grid,CircularProgress } from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -53,6 +54,22 @@ class ProfilePersonalPage extends React.Component {
     this.setState({ [name]: value });
   }
 
+
+  componentDidMount() {
+    this.setState({ loading: true })
+    getCertification().then(r => {
+let Data=r.data.data.Certificate
+console.log(Data)
+      Data=Data?Data:[]
+      this.setState({...this.state, loading: false,Certification:Data,enabled:Data.length<1 })
+
+    }
+
+
+    ).catch(e => console.log(e))
+
+
+  }
 
 
 
@@ -234,6 +251,7 @@ class ProfilePersonalPage extends React.Component {
   render() {
     console.log(this.state)
     const { loading, error } = this.state;
+    if(!loading)
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
@@ -331,6 +349,7 @@ this.state.Certification&&this.state.Certification.map(item => <Old pri={this.st
         </form>
       </div>
     );
+    else return(<CircularProgress  className="progressloading" />)
   }
 }
 

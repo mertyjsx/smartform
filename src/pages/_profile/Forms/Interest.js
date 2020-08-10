@@ -1,6 +1,7 @@
 import React from "react";
 import {interestData } from "../../_services/other.services";
-import { Grid } from "@material-ui/core"
+import {getInterest} from "../../_services/getDatas"
+import { Grid ,CircularProgress} from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -54,6 +55,21 @@ class ProfilePersonalPage extends React.Component {
   }
 
 
+  componentDidMount() {
+    this.setState({ loading: true })
+    getInterest().then(r => {
+let Data=r.data.data.Interest
+
+      Data=Data?Data:[]
+      this.setState({...this.state, loading: false,Interest:Data,enabled:Data.length<1 })
+
+    }
+
+
+    ).catch(e => console.log(e))
+
+
+  }
 
 
   addInterestToArray = () => {
@@ -245,6 +261,7 @@ class ProfilePersonalPage extends React.Component {
   render() {
     console.log(this.state)
     const { loading, error } = this.state;
+    if(!loading)
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
@@ -339,6 +356,7 @@ this.state.Interest&&this.state.Interest.map(item => <Old pri={this.state.privat
         </form>
       </div>
     );
+    else return(<CircularProgress  className="progressloading" />)
   }
 }
 

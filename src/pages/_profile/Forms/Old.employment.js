@@ -21,7 +21,7 @@ const options = [
 ];
 
 export default function Employmentcomponent({ handleCheckbox, 
-                       editIt,old, deleteEmployment,pub,resume,pri,enabled_props}) {
+                       editIt,old, deleteEmployment,pub,resume,pri,}) {
   const [employment, set_employment] = useState(old)
   const [skills, set_skills] = useState([])
   const [details, set_details] = useState([])
@@ -29,7 +29,7 @@ export default function Employmentcomponent({ handleCheckbox,
   const [detail, set_detail] = useState("")
   const [skill, set_skill] = useState("")
   
-  const [enabled, set_enabled] = useState(true)
+  const [enabled, set_enabled] = useState(false)
   const [enabled_skill, set_enabled_skill] = useState(true)
   const [enabled_detail, set_enabled_detail] = useState(true)
 
@@ -103,7 +103,7 @@ export default function Employmentcomponent({ handleCheckbox,
     set_employment(old)
       set_details(old.job_details)
     set_skills(old.skill_gained)
-    set_enabled(enabled_props)
+   
       
       }, [old])
       

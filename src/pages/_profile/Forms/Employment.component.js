@@ -29,7 +29,7 @@ export default function Employmentcomponent({ handleCheckbox,
   const [detail, set_detail] = useState("")
   const [skill, set_skill] = useState("")
   
-  const [enabled, set_enabled] = useState(true)
+  const [enabled, set_enabled] = useState(employments.length<1)
   const [enabled_skill, set_enabled_skill] = useState(true)
   const [enabled_detail, set_enabled_detail] = useState(true)
 

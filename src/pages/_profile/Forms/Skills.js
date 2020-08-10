@@ -1,5 +1,6 @@
 import React from "react";
 import {skillData } from "../../_services/other.services";
+import {getPersonal, getSkill} from "../../_services/getDatas"
 import { Grid } from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -57,7 +58,21 @@ class ProfilePersonalPage extends React.Component {
   }
 
 
+  componentDidMount() {
+    this.setState({ loading: true })
+    getSkill().then(r => {
+let Data=r.data.data.Skill
+console.log(Data)
+      Data=Data?Data:[]
+      this.setState({...this.state, loading: false,skills:Data,enabled:Data.length<1 })
 
+    }
+
+
+    ).catch(e => console.log(e))
+
+
+  }
 
   addSToArray = () => {
 

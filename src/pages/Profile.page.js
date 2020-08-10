@@ -7,6 +7,7 @@ import ProfilePersonalPage from "./_profile/Forms/ProfilePersonal.page";
 import ProfileEducationPage from "./_profile/Forms/ProfileEducation.page";
 import ProfileExperiencePage from "./_profile/Forms/ProfileExperience.page";
 import PorfileCertificatePage from "./_profile/Forms/Certifications"
+
 import Skills from "./_profile/Forms/Skills"
 import Project from "./_profile/Forms/Project"
 import Interest from "./_profile/Forms/Interest"

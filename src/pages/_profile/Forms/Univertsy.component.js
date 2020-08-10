@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
 import { Grid, Button, FormGroup, Paper ,} from "@material-ui/core"
@@ -42,6 +42,15 @@ export default function Univertsycomponent({ handleCheckbox,
   const [enabled_honor, set_enabled_honor] = useState(true)
   const [enabled_award, set_enabled_award] = useState(true)
   const [enabled_course, set_enabled_course] = useState(true)
+
+
+useEffect(()=>{
+
+if(schools.length>0)
+set_enabled(false)
+
+},[schools])
+
   const handleChange = (e) => {
     set_universty({ ...universty, [e.target.name]: e.target.value })
 
@@ -221,7 +230,7 @@ console.log(enabled)
 
         {
 
-          schools&&schools.map(item => <OldUniversty enabled_props={enabled} pri={pri} pub={pub} resume={resume} old={item} changeIt={changeIt}  handleCheckbox={handleCheckbox} deleteSchool={deleteSchool}
+          schools&&schools.map(item => <OldUniversty  pri={pri} pub={pub} resume={resume} old={item} changeIt={changeIt}  handleCheckbox={handleCheckbox} deleteSchool={deleteSchool}
           
           
           

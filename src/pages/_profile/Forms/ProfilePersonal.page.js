@@ -1,20 +1,13 @@
 import React from "react";
 import { personalProfileData } from "../../_services/profile.service";
-import { Grid } from "@material-ui/core"
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import {getPersonal,getPublic} from "../../_services/getDatas"
+import { Grid,CircularProgress } from "@material-ui/core"
+
 import FormControl from '@material-ui/core/FormControl';
-import Multi from "../../_components/MultipleSelect"
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import Chip from '@material-ui/core/Chip';
+
 import MultipleSelect from 'react-select';
 import TextField from '@material-ui/core/TextField';
-import Icon from "../../../assets/icons/delete"
-import Autocomplete from '@material-ui/lab/Autocomplete';
+
 const options = [
   { value: 'public', label: 'Public' },
   { value: 'private', label: 'Private' },
@@ -63,7 +56,25 @@ class ProfilePersonalPage extends React.Component {
 
 
 
+  componentDidMount() {
+    this.setState({ loading: true })
 
+
+
+
+    getPersonal().then(r => {
+
+
+      console.log(r.data.data.Personal)
+      this.setState({...this.state, loading: false,...r.data.data.Personal })
+
+    }
+
+
+    ).catch(e => console.log(e))
+
+
+  }
 
 
 
@@ -212,7 +223,11 @@ class ProfilePersonalPage extends React.Component {
   render() {
     console.log(this.state)
     const { loading, error } = this.state;
-    return (
+
+
+
+    if(!loading)
+      return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
           
@@ -226,7 +241,7 @@ class ProfilePersonalPage extends React.Component {
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                 <FormControl  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="first_name" label="First name" variant="outlined" required />
+                  <TextField className="fullw" defaultValue={this.state["first_name"]} onChange={this.handleChange} id="outlined-basic" name="first_name" label="First name" variant="outlined" required />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
@@ -245,7 +260,7 @@ class ProfilePersonalPage extends React.Component {
               <Grid container xs={12} md={7} className="p-12"  alignItems="center" alignContent="center" >
                 <FormControl  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="middle_name" label="Middle name" variant="outlined" required />
+                  <TextField defaultValue={this.state["middle_name"]}   className="fullw" onChange={this.handleChange} id="outlined-basic" name="middle_name" label="Middle name" variant="outlined" required />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
@@ -264,7 +279,7 @@ class ProfilePersonalPage extends React.Component {
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" className="p-12" >
                 <FormControl  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="last_name" label="last_name" variant="outlined" required />
+                  <TextField defaultValue={this.state["last_name"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="last_name" label="last_name" variant="outlined" required />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12" className="p-12">
@@ -283,7 +298,7 @@ class ProfilePersonalPage extends React.Component {
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                 <FormControl  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="preferred_name" label="preferred_name" variant="outlined" required />
+                  <TextField defaultValue={this.state["prefferred_name"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="preferred_name" label="preferred_name" variant="outlined" required />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
@@ -304,7 +319,7 @@ class ProfilePersonalPage extends React.Component {
                 <Grid item xs={7}>
                   <FormControl  className="fullw">
 
-                    <TextField className="fullw" type="tel" onChange={this.handleChange} id="outlined-basic" name="phone_number" label="phone_number" variant="outlined" required />
+                    <TextField defaultValue={this.state["phone_number"]}  className="fullw" type="tel" onChange={this.handleChange} id="outlined-basic" name="phone_number" label="phone_number" variant="outlined" required />
                   </FormControl>
                 </Grid>
                 <Grid item xs={5}>
@@ -338,7 +353,7 @@ class ProfilePersonalPage extends React.Component {
               <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                 <FormControl  autoComplete="off" className="fullw">
 
-                  <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="address" label="address" variant="outlined" required />
+                  <TextField defaultValue={this.state["adress"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="address" label="address" variant="outlined" required />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={5} className="p-12">
@@ -357,7 +372,7 @@ class ProfilePersonalPage extends React.Component {
                 <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                   <FormControl  autoComplete="off" className="fullw">
 
-                    <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="zip_code" label="zip_code" variant="outlined" required />
+                    <TextField defaultValue={this.state["zip_code"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="zip_code" label="zip_code" variant="outlined" required />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={5} className="p-12">
@@ -376,7 +391,7 @@ class ProfilePersonalPage extends React.Component {
                   <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                     <FormControl  autoComplete="off" className="fullw">
 
-                      <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="city" label="city" variant="outlined" required />
+                      <TextField defaultValue={this.state["city"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="city" label="city" variant="outlined" required />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} md={5} className="p-12">
@@ -395,7 +410,7 @@ class ProfilePersonalPage extends React.Component {
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <FormControl  autoComplete="off" className="fullw">
 
-                        <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="state" label="state" variant="outlined" required />
+                        <TextField  defaultValue={this.state["state"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="state" label="state" variant="outlined" required />
                       </FormControl>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12">
@@ -414,7 +429,7 @@ class ProfilePersonalPage extends React.Component {
                       <Grid container xs={12} md={7} alignItems="center" alignContent="center"  className="p-12" >
                         <FormControl  autoComplete="off" className="fullw">
 
-                          <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="country" label="country" variant="outlined" required />
+                          <TextField defaultValue={this.state["country"]}  className="fullw" onChange={this.handleChange} id="outlined-basic" name="country" label="country" variant="outlined" required />
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={5}  className="p-12">
@@ -459,6 +474,7 @@ class ProfilePersonalPage extends React.Component {
         </form>
       </div>
     );
+    else return(<CircularProgress  className="progressloading" />)
   }
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { profileEducationData, getEducation } from "../../_services/education.service";
+import { profileEducationData} from "../../_services/education.service";
+import {getEducation} from "../../_services/getDatas"
 import { Grid } from "@material-ui/core"
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Multi from "../../_components/MultipleSelect"
 import Select from '@material-ui/core/Select';
+import { CircularProgress } from "@material-ui/core"
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import MultipleSelect from 'react-select';
@@ -31,29 +33,24 @@ class ProfilePersonalPage extends React.Component {
   constructor(props) {
     super(props);
 
+    
+
+
+
+
+
+
+
+
+
     this.state = {
       loading: false,
       high_school_enabled: false,
-      high_school_name: "",
-      high_school_from: "",
-      high_school_to: "",
-      high_school_address: "",
-      high_school_state: "",
-      high_school_city: "",
-      state: "",
-      high_school_country: "",
-      universty: [],
-      universty_name: "",
-      college: "",
-      degree_status: "",
-      degree: "",
-      universty_from: "",
-      universty_to: "",
-      field_of_study: [],
-      honors: [],
-      course_work: [],
-      awards: [],
-      gpa: 0,
+     
+   
+      university: [],
+      
+     
       public: [],
       private: [],
       resume: [],
@@ -67,24 +64,35 @@ class ProfilePersonalPage extends React.Component {
   }
 
   componentDidMount() {
-    getEducation().then(r => console.log(r)).catch(e => console.log(e))
+    this.setState({ loading: true })
+    getEducation().then(r => {
+let educationData=r.data.data.Education
+      
+      this.setState({...this.state, loading: false,...educationData.high_school,university:educationData.university,high_school_enabled:educationData.high_school?true:false })
+
+    }
+
+
+    ).catch(e => console.log(e))
+
 
   }
 
   handleChange(e) {
     const { name, value } = e.target;
+    console.log(name)
     this.setState({ [name]: value });
   }
 
   handleEdit = (obj) => {
-    let uni_Array = this.state.universty
+    let uni_Array = this.state.university
     console.log(obj)
     let index = uni_Array.findIndex(item => item.uni_id === obj.uni_id)
     uni_Array[index] = obj
 
 
     console.log(uni_Array)
-    this.setState({ universty: uni_Array })
+    this.setState({ university: uni_Array })
 
 
   }
@@ -186,20 +194,20 @@ class ProfilePersonalPage extends React.Component {
 
   addSchoolToArray = (school) => {
 
-    let school_array = this.state.universty
+    let school_array = this.state.university
 
     school_array.push(school)
-    this.setState({ universty: school_array })
+    this.setState({ university: school_array })
 
   }
 
 
 
   delete = (school) => {
-    let school_array = this.state.universty.filter(item => item.uni_id !== school)
+    let school_array = this.state.university.filter(item => item.uni_id !== school)
 
 
-    this.setState({ universty: school_array })
+    this.setState({ university: school_array })
 
   }
 
@@ -207,7 +215,7 @@ class ProfilePersonalPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
-
+console.log(this.state)
     profileEducationData(this.state).then(
       (response) => {
         console.log(response)
@@ -222,8 +230,9 @@ class ProfilePersonalPage extends React.Component {
   }
 
   render() {
-
+    console.log(this.state)
     const { loading, error } = this.state;
+    if(!loading)
     return (
       <div className="pro-right-in">
         <form method="post" onSubmit={this.handleSubmit}>
@@ -238,7 +247,7 @@ class ProfilePersonalPage extends React.Component {
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <FormControl autoComplete="off" className="fullw">
 
-                        <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_name" label="School name" variant="outlined" required />
+                        <TextField defaultValue={this.state["school_name"]} className="fullw" onChange={this.handleChange} id="outlined-basic" name="school_name" label="School name" variant="outlined" required />
                       </FormControl>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12">
@@ -247,7 +256,7 @@ class ProfilePersonalPage extends React.Component {
 
                           className="multiSelect"
                           isMulti={true}
-                          onChange={(e) => this.handleCheckbox("high_school_name", e)}
+                          onChange={(e) => this.handleCheckbox("school_name", e)}
                           options={options}
                         />
                       </FormControl>
@@ -257,7 +266,7 @@ class ProfilePersonalPage extends React.Component {
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
-                        <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_city" label="City" variant="outlined" required />
+                        <TextField defaultValue={this.state["city"]} className="fullw" onChange={this.handleChange} id="outlined-basic" name="city" label="City" variant="outlined" required />
                       </form>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12">
@@ -266,7 +275,7 @@ class ProfilePersonalPage extends React.Component {
 
                           className="multiSelect"
                           isMulti={true}
-                          onChange={(e) => this.handleCheckbox("high_school_city", e)}
+                          onChange={(e) => this.handleCheckbox("city", e)}
                           options={options}
                         />
                       </FormControl>
@@ -276,7 +285,7 @@ class ProfilePersonalPage extends React.Component {
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center"  >
                       <form noValidate autoComplete="off" className="fullw">
 
-                        <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_state" label="State" variant="outlined" required />
+                        <TextField defaultValue={this.state["state"]} className="fullw" onChange={this.handleChange} id="outlined-basic" name="state" label="State" variant="outlined" required />
                       </form>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12">
@@ -285,7 +294,7 @@ class ProfilePersonalPage extends React.Component {
 
                           className="multiSelect"
                           isMulti={true}
-                          onChange={(e) => this.handleCheckbox("high_school_state", e)}
+                          onChange={(e) => this.handleCheckbox("state", e)}
                           options={options}
                         />
                       </FormControl>
@@ -295,7 +304,7 @@ class ProfilePersonalPage extends React.Component {
                     <Grid container xs={12} md={7} className="p-12" alignItems="center" alignContent="center" >
                       <form noValidate autoComplete="off" className="fullw">
 
-                        <TextField className="fullw" onChange={this.handleChange} id="outlined-basic" name="high_school_country" label="Country" variant="outlined" required />
+                        <TextField defaultValue={this.state["country"]} className="fullw" onChange={this.handleChange} id="outlined-basic" name="country" label="Country" variant="outlined" required />
                       </form>
                     </Grid>
                     <Grid item xs={12} md={5} className="p-12 ">
@@ -304,7 +313,7 @@ class ProfilePersonalPage extends React.Component {
 
                           className="multiSelect"
                           isMulti={true}
-                          onChange={(e) => this.handleCheckbox("high_school_country", e)}
+                          onChange={(e) => this.handleCheckbox("country", e)}
                           options={options}
                         />
                       </FormControl>
@@ -316,13 +325,13 @@ class ProfilePersonalPage extends React.Component {
 
                         <FormControl autoComplete="off" className="fullw">
 
-                          <TextField InputLabelProps={{ shrink: true }} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_from" label="From" variant="outlined" required />
+                          <TextField defaultValue={this.state["dt_from"]} InputLabelProps={{ shrink: true }} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_from" label="From" variant="outlined" required />
                         </FormControl>
                       </Grid>
                       <Grid item xs={5}  >
                         <FormControl autoComplete="off" className="fullw">
 
-                          <TextField InputLabelProps={{ shrink: true }} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="high_school_to" label="To" variant="outlined" required />
+                          <TextField defaultValue={this.state["dt_to"]} InputLabelProps={{ shrink: true }} type="date" className="fullw fullborder" onChange={this.handleChange} id="outlined-basic" name="dt_to" label="To" variant="outlined" required />
                         </FormControl>
                       </Grid>
                     </Grid>
@@ -333,8 +342,8 @@ class ProfilePersonalPage extends React.Component {
                           className="multiSelect"
                           isMulti={true}
                           onChange={(e) => {
-                            this.handleCheckbox("high_school_from", e)
-                            this.handleCheckbox("high_school_to", e)
+                            this.handleCheckbox("dt_from", e)
+                            this.handleCheckbox("dt_to", e)
                           }}
                           options={options}
                         />
@@ -347,12 +356,12 @@ class ProfilePersonalPage extends React.Component {
 
 
             }
-            <h5 className="m-30">Universty</h5>
+            <h5 className="m-30">University</h5>
             <Univertsy
               pub={this.state.public}
               pri={this.state.private}
               resume={this.state.resume}
-              handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.universty} add={this.addSchoolToArray} changeIt={this.handleEdit}></Univertsy>
+              handleCheckbox={this.handleCheckbox} deleteSchool={this.delete} schools={this.state.university} add={this.addSchoolToArray} changeIt={this.handleEdit}></Univertsy>
           </Grid>
           <div className="form-input-flex d-flex center">
             <div className="left-input-se">
@@ -371,7 +380,7 @@ class ProfilePersonalPage extends React.Component {
           <div className="form-input-flex d-flex center">
             <div className="left-input-se d-flex mt-4">
               {/* <button className="btn btn-purpal">Back</button> */}
-              {this.state.universty.length > 0 &&
+              {this.state.university.length > 0 &&
                 <button className="btn btn-green ml-auto" disabled={loading}>
                   {loading ? "Next....." : "Next"}
                 </button>
@@ -385,6 +394,7 @@ class ProfilePersonalPage extends React.Component {
         </form>
       </div>
     );
+    else return(<CircularProgress  className="progressloading" />)
   }
 }
 

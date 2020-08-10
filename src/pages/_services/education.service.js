@@ -7,6 +7,18 @@ import axios from "axios"
 export const getEducation=()=>{
   const apiUrl = global.config.apiBaseURL.url;
 
+ return axios.get(apiUrl + "user/show_details", {
+    headers:  {
+      "Authorization": "Bearer "+getToken(),
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  })
+
+}
+/*
+export const getEducation=()=>{
+  const apiUrl = global.config.apiBaseURL.url;
+
  return axios.get(apiUrl + "user/show_details?form_name=education", {
     headers:  {
       "Authorization": "Bearer "+getToken(),
@@ -17,8 +29,7 @@ export const getEducation=()=>{
 }
 
 
-
-
+*/
 
 
 
@@ -31,13 +42,13 @@ export const getEducation=()=>{
 export const profileEducationData = async (fieldsState) => {
   const apiUrl = global.config.apiBaseURL.url;
   let dataArray = {
-    school_name: fieldsState.high_school_name,
-   city: fieldsState.high_school_city,
-    state: fieldsState.high_school_state,
-   country: fieldsState.high_school_country,
-   dt_from: fieldsState.high_school_from,
-   dt_to: fieldsState.high_school_to,
-   university:JSON.stringify(fieldsState.universty),
+    school_name: fieldsState.school_name,
+   city: fieldsState.city,
+    state: fieldsState.state,
+   country: fieldsState.country,
+   dt_from: fieldsState.dt_from,
+   dt_to: fieldsState.dt_to,
+   university:JSON.stringify(fieldsState.university),
    pri:JSON.stringify(fieldsState.private),
     resume:JSON.stringify( fieldsState.resume),
     pub: JSON.stringify(fieldsState.public),

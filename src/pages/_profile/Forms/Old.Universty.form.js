@@ -20,7 +20,7 @@ const options = [
   { value: 'resume', label: 'Resume' },
 ];
 
-export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, pri, resume, deleteSchool, enabled_props }) {
+export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, pri, resume, deleteSchool }) {
 
 
   const [universty, set_universty] = useState(old)
@@ -61,7 +61,7 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
     set_courses(old.coursework)
     set_awards(old.award)
 
-    set_enabled(enabled_props)
+    
 
   }, [old])
 
@@ -129,7 +129,7 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
     if (!error) {
       let universty_object = {
         ...universty,
-        uni_id: old.uni_id,
+        uni_id: old.id,
         field_of_study: fields,
         honors: honors,
         coursework: courses,
@@ -212,7 +212,7 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
     if (isPrivate) {
       Arr.push({ value: 'private', label: 'Private' })
     }
-    console.log(Arr)
+   
     return Arr
   }
 

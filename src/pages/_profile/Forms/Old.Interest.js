@@ -20,9 +20,9 @@ const options = [
 ];
 
 export default function Employmentcomponent({ handleCheckbox, 
-                       editIt,old, deleteIt,pub,resume,pri,enabled_props}) {
+                       editIt,old, deleteIt,pub,resume,pri,}) {
   const [data, set_data] = useState({})
-const [enabled, set_enabled] = useState(true)
+const [enabled, set_enabled] = useState(false)
  
 
   const handleChange = (e) => {
@@ -72,7 +72,7 @@ const [enabled, set_enabled] = useState(true)
 
   useEffect(() => {
     set_data(old)
- set_enabled(enabled_props)
+ 
   
       
       }, [old])

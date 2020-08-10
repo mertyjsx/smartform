@@ -20,8 +20,7 @@ export default function OldComponent({old,edit,handleCheckbox,del,name,pub,pri,r
     const [data,set_data]=useState(old)
     const calculate=(name)=>{
       let Arr=[]
-  console.log(resume)
-  console.log(pri)
+
   let isResume=resume&&resume.includes(name)
     let isPublic=pub&&pub.includes(name)
     let isPrivate=pri&&pri.includes(name)
@@ -35,7 +34,7 @@ export default function OldComponent({old,edit,handleCheckbox,del,name,pub,pri,r
       if(isPrivate){
           Arr.push({ value: 'private', label: 'Private' })
       }
-console.log(Arr)
+
       return Arr
   
   
@@ -65,7 +64,7 @@ set_data({...data,value:e.target.value})
 
 let val=calculate(name)
 
-console.log(isFreeze)
+
     return (
        
 <div className="oldContainer">
