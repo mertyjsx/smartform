@@ -67,8 +67,20 @@ class ProfilePersonalPage extends React.Component {
     this.setState({ loading: true })
     getEducation().then(r => {
 let educationData=r.data.data.Education
-      
-      this.setState({...this.state, loading: false,...educationData.high_school,university:educationData.university,high_school_enabled:educationData.high_school?true:false })
+let universtyData=educationData.university?educationData.university:[]
+console.log(universtyData)
+universtyData[0].public=[]
+universtyData[0].private=[]
+universtyData[0].resume=[]
+
+let pub=universtyData.length>0?universtyData.public:[]
+console.log(pub)
+let pri=universtyData.length>0?universtyData.private:[]
+let resume=universtyData.length>0?universtyData.resume:[]
+
+
+      console.log(educationData)
+   this.setState({...this.state, loading: false,...educationData.high_school,university:educationData.university,high_school_enabled:educationData.high_school?true:false})
 
     }
 

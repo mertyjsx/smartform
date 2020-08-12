@@ -66,6 +66,10 @@ class ProfilePersonalPage extends React.Component {
 
 
       console.log(r.data.data.Personal)
+
+
+
+      
       this.setState({...this.state, loading: false,...r.data.data.Personal })
 
     }

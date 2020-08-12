@@ -53,8 +53,7 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
 
 
   useEffect(() => {
-    console.log(universty)
-    console.log(old)
+  
     set_universty(old)
     set_fields(old.field_of_study)
     set_honors(old.honors)
@@ -102,7 +101,7 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
 
   const handleChange = (e) => {
     set_universty({ ...universty, [e.target.name]: e.target.value })
-    console.log(universty)
+   
   }
 
   const changeSchool = (e) => {
@@ -192,11 +191,11 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
   }
 
 
-  console.log(resume)
+  
 
   const calculate = (name) => {
     let Arr = []
-    console.log(name)
+
 
     let isResume = resume && resume.includes(name)
     let isPublic = pub && pub.includes(name)
@@ -227,7 +226,7 @@ export default function OldUniverstyform({ old, changeIt, handleCheckbox, pub, p
 
 
 
-  console.log(enabled)
+ 
   return (
 
     <div className="oldContainer">
